@@ -1,0 +1,58 @@
+.hand {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  position:relative;
+  .cards {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+
+
+    > span {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .cards {
+    margin-left: 10%;
+  }
+  .score {
+    text-align: center;
+    position:absolute;
+    height: $score-height;
+    width:100%;
+    top: 50%;
+    margin-top: ($score-height + ($card-height/2)) * -1.2; //(score-height + (card-height/2))
+    .score-value {
+      display:inline-block;
+      background: #fff;
+      width:$score-height;
+      line-height: 36px;
+      font-size: 16px;
+      height:$score-height;
+      border: 2px solid $primary-color;
+
+      border-radius: $score-height;
+      color: $primary-color;
+      font-weight: bold;
+
+      &.pop-enter {
+        transform: translate3d(0, 50px, 0) rotate(180deg) scale(0.01);
+        &.pop-enter-active {
+          transition: transform $score-enter-duration $bezier $score-enter-delay;
+          transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+        }
+      }
+      &.pop-leave {
+        opacity:1;
+        &.pop-leave-active {
+          transition: opacity $score-leave-duration;
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
