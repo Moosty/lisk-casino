@@ -1,0 +1,182 @@
+:root {
+  --color-deep-100: rgba(12, 21, 46, 1);
+  --color-deep-90: rgba(33, 42, 66, 1);
+  --color-deep-80: rgba(54, 63, 86, 1);
+  --color-deep-75: rgba(65, 74, 96, 1);
+  --color-deep-70: rgba(75, 84, 106, 1);
+  --color-deep-60: rgba(96, 105, 126, 1);
+  --color-deep-55: rgba(107, 115, 136, 1);
+  --color-deep-50: rgba(117, 125, 145, 1);
+  --color-deep-40: rgba(138, 146, 165, 1);
+  --color-deep-30: rgba(159, 167, 185, 1);
+  --color-deep-20: rgba(180, 188, 205, 1);
+  --color-deep-15: rgba(191, 199, 215, 1);
+  --color-deep-10: rgba(201, 209, 225, 1);
+  --color-deep-8: rgba(210, 217, 230, 1);
+  --color-deep-5: rgba(219, 225, 235, 1);
+  --color-deep-3: rgba(229, 233, 241, 1);
+  --color-deep-2: rgba(238, 241, 246, 1);
+  --color-deep-1: rgba(247, 249, 251, 1);
+  --color-deep-0: rgba(255, 255, 255, 1);
+
+  --color-theme-14: rgba(8, 39, 126, 1);
+  --color-theme-13: rgba(19, 54, 150, 1);
+  --color-theme-12: rgba(30, 68, 173, 1);
+  --color-theme-11: rgba(42, 83, 197, 1);
+  --color-theme-10: rgba(53, 97, 220, 1);
+  --color-theme-9-text: rgba(62, 108, 236, 1);
+  --color-theme-9: rgba(64, 112, 244, 1);
+  --color-theme-8: rgba(84, 127, 245, 1);
+  --color-theme-7: rgba(104, 143, 247, 1);
+  --color-theme-6: rgba(124, 158, 248, 1);
+  --color-theme-5: rgba(144, 173, 250, 1);
+  --color-theme-4: rgba(164, 188, 251, 1);
+  --color-theme-3: rgba(184, 204, 252, 1);
+  --color-theme-2: rgba(204, 219, 254, 1);
+  --color-theme-1: rgba(232, 238, 251, 1);
+
+  --color-red-14: rgba(138, 3, 15, 1);
+  --color-red-13: rgba(157, 7, 21, 1);
+  --color-red-12: rgba(176, 11, 27, 1);
+  --color-red-11: rgba(194, 15, 32, 1);
+  --color-red-10: rgba(213, 19, 38, 1);
+  --color-red-9: rgba(232, 23, 44, 1);
+  --color-red-8: rgba(250, 55, 74, 1);
+  --color-red-7: rgba(251, 81, 98, 1);
+  --color-red-6: rgba(251, 107, 121, 1);
+  --color-red-5: rgba(252, 133, 145, 1);
+  --color-red-4: rgba(253, 160, 168, 1);
+  --color-red-3: rgba(254, 186, 192, 1);
+  --color-red-2: rgba(254, 212, 215, 1);
+  --color-red-1: rgba(255, 238, 239, 1);
+
+  --color-green-14: rgba(21, 104, 60, 1);
+  --color-green-13: rgba(23, 127, 72, 1);
+  --color-green-12: rgba(25, 149, 83, 1);
+  --color-green-11: rgba(27, 172, 95, 1);
+  --color-green-10: rgba(29, 194, 106, 1);
+  --color-green-9: rgba(37, 201, 114, 1);
+  --color-green-8: rgba(43, 214, 123, 1);
+  --color-green-7: rgba(71, 219, 140, 1);
+  --color-green-6: rgba(100, 225, 158, 1);
+  --color-green-5: rgba(128, 230, 175, 1);
+  --color-green-4: rgba(156, 236, 193, 1);
+  --color-green-3: rgba(184, 241, 210, 1);
+  --color-green-2: rgba(213, 247, 228, 1);
+  --color-green-1: rgba(241, 252, 245, 1);
+
+  --color-blue-14: rgba(37, 72, 152, 1);
+  --color-blue-13: rgba(30, 85, 169, 1);
+  --color-blue-12: rgba(22, 98, 186, 1);
+  --color-blue-11: rgba(15, 111, 202, 1);
+  --color-blue-10: rgba(7, 124, 219, 1);
+  --color-blue-9: rgba(0, 137, 236, 1);
+  --color-blue-8: rgba(30, 151, 238, 1);
+  --color-blue-7: rgba(59, 165, 241, 1);
+  --color-blue-6: rgba(89, 178, 243, 1);
+  --color-blue-5: rgba(118, 192, 246, 1);
+  --color-blue-4: rgba(148, 206, 248, 1);
+  --color-blue-3: rgba(177, 220, 250, 1);
+  --color-blue-2: rgba(207, 233, 253, 1);
+  --color-blue-1: rgba(236, 247, 255, 1);
+
+  --color-yellow-14: rgba(168, 91, 0, 1);
+  --color-yellow-13: rgba(185, 111, 0, 1);
+  --color-yellow-12: rgba(203, 131, 0, 1);
+  --color-yellow-11: rgba(220, 151, 0, 1);
+  --color-yellow-10: rgba(238, 171, 0, 1);
+  --color-yellow-9: rgba(255, 191, 0, 1);
+  --color-yellow-8: rgba(255, 198, 28, 1);
+  --color-yellow-7: rgba(255, 206, 56, 1);
+  --color-yellow-6: rgba(255, 213, 84, 1);
+  --color-yellow-5: rgba(255, 221, 112, 1);
+  --color-yellow-4: rgba(255, 228, 140, 1);
+  --color-yellow-3: rgba(255, 235, 168, 1);
+  --color-yellow-2: rgba(255, 243, 196, 1);
+  --color-yellow-1: rgba(255, 250, 224, 1);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.noscrollbar::-webkit-scrollbar {
+  width: 0;
+  background: transparent; /* make scrollbar transparent */
+}
+
+:focus {
+  outline: none !important;
+}
+
+:root {
+  --color-text-headings: var(--color-deep-90);
+  --color-text-body: var(--color-deep-75);
+  --color-text-caption: var(--color-deep-60);
+  --color-text-disabled: var(--color-deep-50);
+  --color-text-placeHolder: var(--color-deep-40);
+  --color-text-link: var(--color-theme-9-text);
+  --color-text-hover: var(--color-theme-11);
+  --color-text-error: var(--color-red-9);
+
+  --color-surface-bg: var(--color-deep-1);
+  --color-surface-icon-bg: var(--color-deep-5);
+  --color-surface-outline: var(--color-deep-10);
+
+  --color-theme-navbar-bg: var(--color-deep-100);
+
+  --color-theme-button-bg: var(--color-theme-9);
+  --color-theme-button-bg-secondary: var(--color-deep-0);
+  --color-theme-button-text-primary: var(--color-deep-0);
+
+  --color-theme-hover: var(--color-theme-10);
+  --color-theme-pressed: var(--color-theme-11);
+  --color-theme-dark: var(--color-theme-13);
+  --color-theme-light: var(--color-theme-2);
+
+  --color-button-primary: var(--color-theme-9);
+
+  --color-forms-border: var(--color-deep-30);
+  --color-forms-hover-border: var(--color-deep-70);
+  --color-forms-read-only: var(--color-deep-2);
+  --color-forms-disabled: var(--color-deep-5);
+  --color-forms-active: var(--color-theme-8);
+  --color-forms-error: var(--color-red-8);
+  --color-forms-divider: var( --color-deep-15);
+
+  --color-danger-background: var(--color-red-1);
+  --color-danger-light: var(--color-red-3);
+  --color-danger-outline: var(--color-red-3);
+  --color-danger-icon: var(--color-red-9);
+  --color-danger-dark: var(--color-red-13);
+
+  --color-success-background: var(--color-green-1);
+  --color-success-light: var(--color-green-3);
+  --color-success-outline: var(--color-green-3);
+  --color-success-icon: var(--color-green-9);
+  --color-success-dark: var(--color-green-13);
+
+  --color-info-background: var(--color-blue-1);
+  --color-info-light: var(--color-blue-3);
+  --color-info-outline: var(--color-blue-3);
+  --color-info-icon: var(--color-blue-9);
+  --color-info-dark: var(--color-blue-13);
+
+  --color-warning-background: var(--color-yellow-1);
+  --color-warning-light: var(--color-yellow-4);
+  --color-warning-outline: var(--color-yellow-4);
+  --color-warning-icon: var(--color-yellow-9);
+  --color-warning-dark: var(--color-yellow-13);
+
+  --border-radius-default: 12px;
+
+  --shadow-defaultPrimary: 0 3px 14px rgba(64, 112, 244, 0.5);
+  --shadow-defaultSecondary: -4px 2px 36px -10px rgba(43, 214, 123, 0.7);
+  --shadow-defaultTertiary: -4px 2px 36px -10px rgba(250, 55, 74, 0.7);
+
+  --font-familyPrimary: 'Poppains';
+  --font-familyHeadings: 'Poppins';
+  --font-familyButtons: 'Roboto';
+  --font-familyBody: 'Roboto';
+  --font-familyCaption: 'Roboto';
+}
