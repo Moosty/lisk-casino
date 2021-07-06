@@ -94,11 +94,7 @@ export const Home = ({account, setModal, filters, visible, userName, hands}) => 
   //   }
   // }
 
-  return <div style={{backgroundColor: "#114602"}} className={"h-full"}>
-    <Container className={"flex flex-col space-y-10 "}>
-      <Dealer result={5}/>
-      <Player result={6} />
-      <GameControl/>
-    </Container>
-  </div>
+return (<div>
+  test home </div>
+)
 }
