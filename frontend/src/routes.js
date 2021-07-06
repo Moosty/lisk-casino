@@ -56,6 +56,18 @@ export const Routes = () => {
             <Route path={"/explore"}>
               <Views.Explore filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
             </Route>
+            <Route path={"/top-list"}>
+              <Views.TopList filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
+            </Route>
+            <Route path={"/blackjack"}>
+              <Views.Blackjack filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
+            </Route>
+            <Route path={"/dices"}>
+              <Views.Dices filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
+            </Route>
+            <Route path={"/roulette"}>
+              <Views.Roulette filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
+            </Route>
             <Route path={"/"}>
               <Views.Home filters={filtersFilter} account={account} setModal={setCurrentOpen} visible={visible}/>
             </Route>
