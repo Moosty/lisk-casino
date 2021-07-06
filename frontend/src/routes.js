@@ -43,8 +43,8 @@ export const Routes = () => {
         onLoginClick={() => setCurrentOpen("login")}
         onRegisterClick={() => setCurrentOpen("register")}
       />
-      <div style={{backgroundColor:"#114602"}} className="w-full  min-h-screen  flex flex-col">
-        <div  className={"w-full mx-auto md:w-app flex-grow mb-10"}>
+      <div style={{backgroundColor:""}} className="w-full  min-h-screen  flex flex-col">
+        <div  className={"w-full mx-auto flex-grow "}>
           <PageTop updateFilters={updateFilters} filters={filtersFilter} changeToggle={() => setVisible(!visible)}/>
           <Switch>
             <Route path={"/my-projects"}>
