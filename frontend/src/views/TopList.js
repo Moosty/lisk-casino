@@ -1,13 +1,10 @@
 import React from "react";
-import {Alert} from "../components/Alert";
+import {Table} from "../components/Table";
 
 export const TopList = ({}) => {
 
   return (<div>
-      test
-      <Alert success label="This has been a success!"/>
-
-
+      <Table/>
     </div>
   )
 }
