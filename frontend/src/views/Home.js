@@ -27,9 +27,9 @@ export const Home = ({account, setModal, filters, visible, userName, hands}) => 
       </div>
       <div className="flex-col my-10 lg:my-auto w-full lg:w-1/3 ">
         <Typography type="sloganLarge" Element="h5" className="text-themeButtonBg  hidden lg:block">Together, we
-          decide!</Typography>
+          Play!</Typography>
         <Typography type="sloganSmall" Element="h5" className="text-themeButtonBg lg:hidden ">Together, we
-          decide!</Typography>
+          Play!</Typography>
         <Typography type="h3" Element="span" className="text-textBody my-auto ">Everyone is equally
           important</Typography>
         <Button
@@ -44,7 +44,7 @@ export const Home = ({account, setModal, filters, visible, userName, hands}) => 
     <Container
       className={["flex flex-col lg:flex-row justify-between my-4 space-x-20  lg:my-10"].join(" ")}>
       <div className="flex flex-col w-1/2  mb-4">
-        <Typography type="h1" Element="h1">Kalipo</Typography>
+        <Typography type="h1" Element="h1">Lisk Casino</Typography>
         <Typography type="body" Element="span">Voting is a valuable governance tool. Votings give community members the
           possibility to exert influence and to express their viewpoints. However, votings consume time and energy of
           the voters and a voting committee. This often results in poor voter attendance and even in invalid votings.
@@ -52,7 +52,7 @@ export const Home = ({account, setModal, filters, visible, userName, hands}) => 
         </Typography>
       </div>
       <div className="flex flex-col  w-1/2 ">
-        <Typography type="h1" Element="h1">About the Kalipo team</Typography>
+        <Typography type="h1" Element="h1">About the Lisk Casino team</Typography>
         <Typography type="body" Element="span">The team consists of Xinrong Ding, Peter Nobels and <a
           href="https://moosty.com/contact" target="_blank" rel="noopener noreferrer">Moosty</a> (Jurre, Raphael,
           Sander). With different background, skillsets and experience we are on a journey to reinvent how organisations
