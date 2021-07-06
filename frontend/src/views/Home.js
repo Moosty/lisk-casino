@@ -10,8 +10,11 @@ import {useProjects} from "../hooks/projects";
 import {createTransaction} from "../utils/transactions";
 import {AppContext} from "../appContext";
 import {transactionStates} from "@moosty/dao-storybook/dist/stories/modals/templates/resultTransaction";
+import {Dealer} from "../components/Dealer";
+import {Hand} from "../components/Hand";
+import {GameControl} from "../components/GameControl";
 
-export const Home = ({account, setModal, filters, visible}) => {
+export const Home = ({account, setModal, filters, visible, userName}) => {
   const history = useHistory()
   const {getClient} = useContext(AppContext);
   const {projects} = useProjects();
@@ -91,69 +94,26 @@ export const Home = ({account, setModal, filters, visible}) => {
   return <div style={{backgroundColor: "#114602"}} className={"h-screen"}>
     <Container className={"flex flex-col space-y-10"}>
       {/*//DEALER*/}
-      <Container className="flex flex-col justify-center">
-        <div className="font-medium text-24px text-yellow-300 text-center">
-          Dealer: 15
-        </div>
-        <Container className=" space-x-2  w-1/3 flex flex-row justify-center">
-
-          <img src={cards.H7} className={"w-32"}/>
-          <img src={cards.B1} className={"w-32"}/>
-        </Container>
-      </Container>
-      <Container className=" flex flex-col justify-center">
-
-        <div className="font-medium text-24px text-yellow-300 text-center">
-          Player: 14
-        </div>
-        <div className="flex-col md:flex-row flex space-x-4">
-        <Container className="space-x-2 w-1/3 flex flex-row justify-center">
-
-          <img src={cards.HJ} className={"w-32"}/>
-          <img src={cards.HK} className={"w-32"}/>
-          <img src={cards.HQ} className={"w-32"}/>
-        </Container>
-        </div>
-        {/*controls*/}
-        <div className="flex flex-col w-full">
-          <Container className="my-8 w-full flex flex-row justify-center space-x-4">
-            place bet
-          </Container>
-          <Container className="my-8 w-full flex flex-row justify-center space-x-4">
-            <div className="bg-green-500 pointer text-white font-medium py-2 px-8 rounded-default"> HIT</div>
-            <div className="bg-yellow-500 pointer text-white font-medium py-2 px-8 rounded-default"> STAND</div>
-          </Container>
-        </div>
-      </Container>
+<Dealer result={5} />
       <div className="flex flex-row">
-      <Container className=" flex flex-col justify-center">
+      <Container className=" flex flex-col items-center space-y-4">
 
         <div className="font-medium text-24px text-yellow-300 text-center">
-          Player: 14
+          Raphael 18
         </div>
-        <div className="flex-col md:flex-row flex space-x-4">
-        <Container className="space-x-2 w-1/3 flex flex-row justify-center">
-
-          <img src={cards.HJ} className={"w-32"}/>
-          <img src={cards.HK} className={"w-32"}/>
-          <img src={cards.HQ} className={"w-32"}/>
-        </Container>
+        <div className="flex-col md:flex-row flex space-x-4 space-y-4">
+       <Hand cards={[34,44]} />
         </div>
         {/*controls*/}
         <div className="flex flex-col w-full">
-          <Container className="my-8 w-full flex flex-row justify-center space-x-4">
-            place bet
-          </Container>
-          <Container className="my-8 w-full flex flex-row justify-center space-x-4">
-            <Button className="bg-green-500 pointer text-white font-medium py-2 px-8 rounded-default"> HIT</Button>
-            <Button className="bg-yellow-500 pointer text-white font-medium py-2 px-8 rounded-default"> STAND</Button>
-          </Container>
-        </div>
 
+
+        </div>
+        <GameControl />
 
       </Container>
-      </div>
 
+      </div>
 
 
     </Container>
