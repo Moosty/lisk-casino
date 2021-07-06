@@ -10,6 +10,7 @@ import {Button} from "@moosty/dao-storybook";
 import {RocketSvg} from "@moosty/dao-storybook";
 import {BlogSection} from "@moosty/dao-storybook";
 import {blogs} from "../fixtures/blogs";
+import {HeroContainer} from "../containers/Hero";
 
 export const Home = ({account, setModal, filters, visible, userName, hands}) => {
   const history = useHistory()
@@ -17,11 +18,12 @@ export const Home = ({account, setModal, filters, visible, userName, hands}) => 
   const {projects} = useProjects();
   const {height,} = useBlocks();
 
-  return (<>
+  return (
+    <div className="bg-blue" style={{backgroundImage:"/images/pexels-photo-2837909.jpeg", backgroundSize:"cover"}}>
     <Container
+
       className="flex flex-col lg:items-center  lg:flex-row-reverse my-10 lg:my-16 lg:justify-between min-h-screen">
       <div className="flex w-full lg:w-2/3 xl:w1/3 ">
-        <img src={"/theme01.png"}/>
       </div>
       <div className="flex-col my-10 lg:my-auto w-full lg:w-1/3 ">
         <Typography type="sloganLarge" Element="h5" className="text-themeButtonBg  hidden lg:block">Together, we
@@ -62,5 +64,5 @@ export const Home = ({account, setModal, filters, visible, userName, hands}) => 
     </Container>
     <Container className={["flex", "flex-row "].join(" ")}>
       <BlogSection title="Blogs" descriptionTop="" blogPosts={blogs}/>
-    </Container></>)
+    </Container></div>)
 }
