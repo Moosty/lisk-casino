@@ -1,13 +1,7 @@
 export const footerItems = {
-  casino: [{
-    label: "Read the blog",
-    to: "https://lisk.io/blog/apps/building-lisk-crowd-project"
-  }, {
-    label: "About the project team",
-    to: "https://moosty.com"
-  }, {
+  liskCasino: [{
     label: "Github",
-    to: "https://github.com/Moosty/lisk-crowdfund"
+    to: "https://github.com/Moosty/lisk-casino"
   }],
   lisk: [{
     label: "What is Lisk?",
