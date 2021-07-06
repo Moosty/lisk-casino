@@ -6,11 +6,9 @@ import {PageTop} from "./containers/PageTop";
 import {ModalContainer} from "./containers/Modal";
 import {useAuth} from "./hooks/auth";
 import {ContentSection, Footer, Hero} from "@moosty/dao-storybook";
-import {FooterAuthor, FooterItems} from "@moosty/dao-storybook/dist/fixtures/crowdfund/footerItems";
-import {projectImages} from "@moosty/dao-storybook/dist/shared/global.crowdfund";
 import {ContentContainer} from "./containers/Content";
-import {HeroContainer} from "./containers/Hero";
 import {TopHeader} from "./components/TopHeader";
+import {footerAuthor, footerItems} from "./fixtures/footerItems";
 
 export const Routes = () => {
   const history = useHistory();
@@ -77,8 +75,8 @@ export const Routes = () => {
         </div>
         <ContentContainer />
         <Footer
-          author={FooterAuthor}
-          items={FooterItems}
+          author={footerAuthor}
+          items={footerItems}
         />
       </div>
     </Router>
