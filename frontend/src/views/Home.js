@@ -2,7 +2,7 @@
 import React, {useContext, useEffect} from "react";
 import * as cards from '../assets/cards'
 import {Buffer, transactions} from "@liskhq/lisk-client"
-import {AccountProjectList, AccountProjectSingleItem, Container, Button, } from "@moosty/dao-storybook";
+import {AccountProjectList, AccountProjectSingleItem, Container, Button,} from "@moosty/dao-storybook";
 import {useBlocks} from "../hooks/blocks";
 import {useHistory} from "react-router-dom";
 import {crowdFundStates} from "@moosty/dao-storybook/dist/shared/global.crowdfund";
@@ -13,12 +13,15 @@ import {transactionStates} from "@moosty/dao-storybook/dist/stories/modals/templ
 import {Dealer} from "../components/Dealer";
 import {Hand} from "../components/Hand";
 import {GameControl} from "../components/GameControl";
+import {Card} from "../components/Card";
+import {Player} from "../components/Player";
 
-export const Home = ({account, setModal, filters, visible, userName}) => {
+export const Home = ({account, setModal, filters, visible, userName, hands}) => {
   const history = useHistory()
   const {getClient} = useContext(AppContext);
   const {projects} = useProjects();
   const {height,} = useBlocks();
+
 
   //
   // useEffect(() => {
@@ -91,32 +94,11 @@ export const Home = ({account, setModal, filters, visible, userName}) => {
   //   }
   // }
 
-  return <div style={{backgroundColor: "#114602"}} className={"h-screen"}>
-    <Container className={"flex flex-col space-y-10"}>
-      {/*//DEALER*/}
-<Dealer result={5} />
-      <div className="flex flex-row">
-      <Container className=" flex flex-col items-center space-y-4">
-
-        <div className="font-medium text-24px text-yellow-300 text-center">
-          Raphael 18
-        </div>
-        <div className="flex-col md:flex-row flex space-x-4 space-y-4">
-       <Hand cards={[34,44]} />
-        </div>
-        {/*controls*/}
-        <div className="flex flex-col w-full">
-
-
-        </div>
-        <GameControl />
-
-      </Container>
-
-      </div>
-
-
+  return <div style={{backgroundColor: "#114602"}} className={"h-full"}>
+    <Container className={"flex flex-col space-y-10 "}>
+      <Dealer result={5}/>
+      <Player result={6} />
+      <GameControl/>
     </Container>
-
   </div>
 }

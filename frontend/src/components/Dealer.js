@@ -9,7 +9,7 @@ export const Dealer = ({result}) =>
   return (
 
 
-<Container className="flex flex-col justify-center space-y-4">
+<Container className="h-1/3 flex flex-col justify-center space-y-4">
   <div className="font-medium text-24px text-yellow-300 text-center">
     Dealer {result}
   </div>
