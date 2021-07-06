@@ -10,6 +10,7 @@ import {FooterAuthor, FooterItems} from "@moosty/dao-storybook/dist/fixtures/cro
 import {projectImages} from "@moosty/dao-storybook/dist/shared/global.crowdfund";
 import {ContentContainer} from "./containers/Content";
 import {HeroContainer} from "./containers/Hero";
+import {TopHeader} from "./components/TopHeader";
 
 export const Routes = () => {
   const history = useHistory();
@@ -36,6 +37,7 @@ export const Routes = () => {
         externalError={registerError}
         ctaLoading={loadingSprinkler}
       />
+      <TopHeader />
       <NavBarContainer
         setModal={setCurrentOpen}
         onSignOut={() => onSignOut()}
