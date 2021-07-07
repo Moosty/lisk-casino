@@ -5,6 +5,7 @@ import {Player} from "../components/Player";
 import {GameControl} from "../components/GameControl";
 import {SliderInput} from "../components/SliderInput";
 import {Table} from "../components/Table";
+import {Alert} from "../components/Alert";
 
 export const Blackjack = ({}) => {
 
@@ -14,6 +15,7 @@ export const Blackjack = ({}) => {
   return <div  className={"h-full"}>
     <Container  className={"flex flex-col space-y-4 "}>
       <div style={{backgroundColor: "#114602"}} className="w-app mx-auto rounded-default mt-16 p-8 space-y-8">
+        <Alert success />
       <Dealer result={5}/>
       <Player bet={bet}  result={6} />
       </div>
