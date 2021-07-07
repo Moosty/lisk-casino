@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import {Button, ButtonGroup, Container, SimpleInput, Typography} from "@moosty/dao-storybook";
 import {SliderInput} from "../components/SliderInput";
 import {LotteryPriceNumbers} from "../components/LotteryPriceNumbers";
+import {MyLotteryNumbers} from "../components/MyLotteryNumbers";
 
 export const Lottery = ({
                           nextDrawNumber = 1,
@@ -21,7 +22,8 @@ export const Lottery = ({
 
       <div className="w-app mx-auto mb-8">
         <div className="flex flex-row space-x-4 mb-8">
-          <div className="flex flex-col w-1/3 space-y-4 bg-indigo-600 rounded-default py-4 px-8">
+          <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500
+          flex flex-col w-1/3 space-y-4  rounded-default py-4 px-8">
 
             <div className="flex flex-row space-x-4 text-24px">
               <Typography type="span" type="span"
@@ -47,8 +49,22 @@ export const Lottery = ({
 
 
           </div>
-            <div className="flex flex-col w-full space-y-4 bg-indigo-600 rounded-default py-4 px-8">
-              test
+            <div className="bg-gradient-to-r from-indigo-600  to-black
+            flex flex-col w-1/3 space-y-4   rounded-default py-4 px-8">
+              <div className="flex flex-col text-24px">
+                <Typography type="span" type="span"
+                            className="font-bold text-white mb-4">Your Tickets</Typography>
+                <div className="flex flex-col space-y-4">
+                  <MyLotteryNumbers />
+                  <MyLotteryNumbers />
+                  <MyLotteryNumbers />
+                </div>
+              </div>
+          </div>
+          <div className="bg-gradient-to-r from-indigo-600  to-black
+            flex flex-col w-1/3 space-y-4   rounded-default py-4 px-8">
+            <Typography type="span" type="span"
+                        className="font-bold text-white mb-4">Buy Tickets</Typography>
           </div>
 
         </div>
