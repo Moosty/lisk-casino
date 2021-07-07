@@ -41,6 +41,12 @@ export const NavBarContainer = ({onLoginClick, onRegisterClick, onSignOut, user,
         current: '/blackjack' === location.pathname,
       },
       {
+        name: 'Lottery',
+        href: () => history.push('/lottery'),
+        path: '/lottery',
+        current: '/lottery' === location.pathname,
+      },
+      {
         name: 'Top List',
         href: () => history.push('/top-list'),
         path: '/top-list',
