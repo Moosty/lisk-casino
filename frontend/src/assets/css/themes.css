@@ -1,0 +1,101 @@
+.dao-light {
+    /* COLORS */
+
+    --color-text-headings: var(--color-deep-90);
+    --color-text-body: var(--color-deep-75);
+    --color-text-caption: var(--color-deep-60);
+    --color-text-disabled: var(--color-deep-50);
+    --color-text-placeHolder: var(--color-deep-40);
+    --color-text-link: var(--color-theme-9-text);
+    --color-text-hover: var(--color-theme-11);
+    --color-text-error: var(--color-red-9);
+
+    --color-surface-bg: var(--color-deep-1);
+    --color-surface-icon-bg: var(--color-deep-5);
+    --color-surface-outline: var(--color-deep-10);
+
+
+    --color-theme-button-bg: var(--color-theme-9);
+    --color-theme-button-bg-secondary: var(--color-deep-0);
+    --color-theme-button-text-primary: var(--color-deep-0);
+
+    --color-theme-hover: var(--color-theme-10);
+    --color-theme-pressed: var(--color-theme-11);
+    --color-theme-dark: var(--color-theme-13);
+    --color-theme-light: var(--color-theme-2);
+
+    --color-button-primary: var(--color-theme-9);
+
+    --color-forms-border: var(--color-deep-30);
+    --color-forms-hover-border: var(--color-deep-70);
+    --color-forms-read-only: var(--color-deep-2);
+    --color-forms-disabled: var(--color-deep-5);
+    --color-forms-active: var(--color-theme-8);
+    --color-forms-error: var(--color-red-8);
+    --color-forms-divider: var( --color-deep-15);
+
+    --color-danger-background: var(--color-red-1);
+    --color-danger-light: var(--color-red-3);
+    --color-danger-outline: var(--color-red-3);
+    --color-danger-icon: var(--color-red-9);
+    --color-danger-dark: var(--color-red-13);
+
+    --color-success-background: var(--color-green-1);
+    --color-success-light: var(--color-green-3);
+    --color-success-outline: var(--color-green-3);
+    --color-success-icon: var(--color-green-9);
+    --color-success-dark: var(--color-green-13);
+
+    --color-info-background: var(--color-blue-1);
+    --color-info-light: var(--color-blue-3);
+    --color-info-outline: var(--color-blue-3);
+    --color-info-icon: var(--color-blue-9);
+    --color-info-dark: var(--color-blue-13);
+
+    --color-warning-background: var(--color-yellow-1);
+    --color-warning-light: var(--color-yellow-4);
+    --color-warning-outline: var(--color-yellow-4);
+    --color-warning-icon: var(--color-yellow-9);
+    --color-warning-dark: var(--color-yellow-13);
+
+    /* BORDERS */
+    --border-radius-default: 12px;
+
+    /* SHADOWS */
+    --shadow-defaultPrimary: 0 3px 14px rgba(64, 112, 244, 0.5);
+    --shadow-defaultSecondary: -4px 2px 36px -10px rgba(43, 214, 123, 0.7);
+    --shadow-defaultTertiary: -4px 2px 36px -10px rgba(250, 55, 74, 0.7);
+}
+
+.crowd-light {
+    /* COLORS */
+    --color-theme-button-bg: #191414;
+    --color-theme-button-bg-secondary: #2dcafa;
+    --color-theme-button-text-primary: #fff;
+    --color-theme-button-text-secondary: #191414;
+
+
+    --color-theme-hover: #191414;
+    --color-theme-pressed: #a50046;
+    --color-theme-dark: #68002d;
+    --color-theme-light: #fc367d;
+
+    --color-theme-navbar-bg: #38002b;
+
+    /* BORDERS */
+    --border-radius-default: 8px;
+
+    /* SHADOWS */
+    --shadow-defaultPrimary: 0 3px 14px rgba(236, 30, 203, 0);
+    --shadow-defaultSecondary: -4px 2px 36px -10px rgba(43, 214, 123, 0);
+    --shadow-defaultTertiary: -4px 2px 36px -10px rgba(250, 55, 74, 0);
+
+    /*Typography */
+    --font-familyPrimary: 'Montserrat', sans-serif;
+    --font-familyHeadings: 'Montserrat', sans-serif;
+    /*--font-familyButtons: 'Montserrat', sans-serif;*/
+
+    /*--font-familyBody: 'Montserrat', sans-serif;*/
+    /*--font-familyCaption: 'Montserrat', sans-serif;*/
+}
+

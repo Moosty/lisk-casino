@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Id":"MyBucketPolicy",
+  "Statement": [
+    {
+      "Sid": "DelegateAccess",
+      "Effect":"Allow",
+      "Principal":"*",
+      "Action":[
+        "s3:GetObject"
+      ],
+      "Resource":[
+        "liskcrowd.moosty.com/*"
+      ]
+    }
+  ]
+}
