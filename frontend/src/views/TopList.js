@@ -1,10 +1,10 @@
 import React from "react";
-import {Table} from "../components/Table";
+import {TableTopList} from "../components/TableTopList";
 
 export const TopList = ({}) => {
 
   return (<div>
-      <Table/>
+      <TableTopList/>
     </div>
   )
 }

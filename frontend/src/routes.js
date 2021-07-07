@@ -67,6 +67,9 @@ export const Routes = () => {
             <Route path={"/roulette"}>
               <Views.Roulette filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
             </Route>
+            <Route path={"/lottery"}>
+              <Views.Lottery filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
+            </Route>
             <Route path={"/"}>
               <Views.Home filters={filtersFilter} account={account} setModal={setCurrentOpen} visible={visible}/>
             </Route>
