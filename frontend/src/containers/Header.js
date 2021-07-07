@@ -19,12 +19,12 @@ export const Header = ({
                                }) => {
 
   return (
-    <div className="relative">
+    <div className="relative w-app rounded-default mx-auto mt-16">
       <div className="absolute inset-0">
 
         <img
           className="w-full h-full object-cover"
-          src={"/images/casino1.jpeg"}
+          src={"/images/casinoabstract.jpeg"}
           alt=""
         />
 

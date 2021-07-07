@@ -27,7 +27,7 @@ export const Home = ({account, setModal, filters, visible, userName, hands}) => 
            gradient/>
 
     <Container
-      className={["flex flex-col lg:flex-row justify-between my-4 space-x-20  md:w-app "].join(" ")}>
+      className={["flex flex-col lg:flex-row justify-between my-16 space-x-20  md:w-app "].join(" ")}>
       <div className="flex flex-col w-1/2  mb-4">
         <Typography type="h1" Element="h1">Lisk Casino</Typography>
         <Typography type="body" Element="span">Voting is a valuable governance tool. Votings give community members the
@@ -47,7 +47,7 @@ export const Home = ({account, setModal, filters, visible, userName, hands}) => 
           </a></Typography>
       </div>
     </Container>
-    <Container className={["flex", "flex-row "].join(" ")}>
+    <Container className={["flex", "flex-row", "w-app"].join(" ")}>
       <BlogSection title="Blogs" descriptionTop="" blogPosts={blogs}/>
     </Container></>)
 }

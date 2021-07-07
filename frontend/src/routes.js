@@ -45,7 +45,6 @@ export const Routes = () => {
       />
       <div style={{backgroundColor:""}} className="w-full  min-h-screen  flex flex-col">
         <div  className={"w-full mx-auto flex-grow "}>
-          <PageTop updateFilters={updateFilters} filters={filtersFilter} changeToggle={() => setVisible(!visible)}/>
           <Switch>
             <Route path={"/my-projects"}>
               <Views.MyProjects filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
