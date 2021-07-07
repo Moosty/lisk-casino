@@ -19,7 +19,7 @@ export const Header = ({
                                }) => {
 
   return (
-    <div className="relative w-app rounded-default mx-auto mt-16">
+    <div className="relative w-app rounded-default mx-auto mt-16 rounded-default">
       <div className="absolute inset-0">
 
         <img
