@@ -18,8 +18,8 @@ export const Hand = ({cards, double, bet, split, dealer, result}) => {
       </Container>
       {!dealer &&
       <>
-        <div className="bg-surfaceBg w-1/6 justify-center mx-auto flex rounded py-2">
-          <span className="font-medium mr-4">Bet</span>{bet}
+        <div className="bg-surfaceBg w-2/3 justify-around mx-auto flex rounded py-2">
+          <span className="font-medium mr-4 w-1/2">Bet</span>{bet}
         </div>
         <HandControl split={split} double={double}/>
       </>
