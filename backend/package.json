@@ -100,6 +100,7 @@
 	"dependencies": {
 		"@liskhq/lisk-framework-dashboard-plugin": "^0.1.0",
 		"@liskhq/lisk-framework-faucet-plugin": "^0.1.0",
+		"@moosty/lisk-sprinkler": "^0.1.9",
 		"@oclif/command": "1.8.0",
 		"@oclif/plugin-autocomplete": "0.3.0",
 		"@oclif/plugin-help": "3.2.2",
