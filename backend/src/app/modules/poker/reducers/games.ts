@@ -1,10 +1,10 @@
 import {codec, cryptography} from "lisk-sdk";
 import {ResultRng} from "../../rng/rng_module";
 
-const CHAIN_STATE_POKER_GAMES = "poker:games";
-const CHAIN_STATE_POKER_PLAYER = "poker:archive";
+export const CHAIN_STATE_POKER_GAMES = "poker:games";
+export const CHAIN_STATE_POKER_PLAYER = "poker:archive";
 
-const GamesArchiveStateStoreSchema = {
+export const GamesArchiveStateStoreSchema = {
   $id: "poker/archive",
   type: "object",
   required: ["games"],
@@ -19,7 +19,7 @@ const GamesArchiveStateStoreSchema = {
   }
 }
 
-const GamesStateStoreSchema = {
+export const GamesStateStoreSchema = {
   $id: "poker/games",
   type: "object",
   required: ["open", "wager", "playerHands", "houseCards", "playerAddress", "id", "height"],
@@ -86,11 +86,9 @@ const GamesStateStoreSchema = {
   }
 }
 
-export const getGameId = (wager, address, nonce) => {
-  const wagerBuffer = Buffer.from(wager);
-  const nonceBuffer = Buffer.from(nonce);
+export const getGameId = (address, nonce) => {
+  const nonceBuffer = Buffer.from(nonce.toString());
   const seed = Buffer.concat([
-    wagerBuffer,
     address,
     nonceBuffer,
   ]);
@@ -98,20 +96,12 @@ export const getGameId = (wager, address, nonce) => {
 }
 
 export const createEmptyGame = ({wager, address, nonce}) => ({
-  id: getGameId(wager, address, nonce),
+  id: getGameId(address, nonce),
   wager,
 })
 
 export const findGameById = async (stateStore, id) => {
   const gameBuffer = await stateStore.chain.get(`${CHAIN_STATE_POKER_GAMES}:${id.toString('hex')}`)
-  return gameBuffer ? codec.decode(
-    GamesStateStoreSchema,
-    gameBuffer,
-  ) : null
-}
-
-export const getGameById = async (dataAccess, id) => {
-  const gameBuffer = await dataAccess.getChainState(`${CHAIN_STATE_POKER_GAMES}:${id.toString('hex')}`)
   return gameBuffer ? codec.decode(
     GamesStateStoreSchema,
     gameBuffer,
@@ -144,6 +134,13 @@ export const addGame = async (stateStore, {reducerHandler, game}) => {
     amount: 3,
     superSeed: game.id.toString('hex')
   });
+  if (initialCards.numbers.length !== 3) {
+    if (gameStore) {
+      throw new Error(
+        `RNG module failed`
+      )
+    }
+  }
   const newGame = {
     open: 1,
     wager: game.wager,
@@ -152,20 +149,21 @@ export const addGame = async (stateStore, {reducerHandler, game}) => {
         id: 0,
         state: "undecided",
         cards: [
-          initialCards[0].number,
-          initialCards[1].number,
+          initialCards.numbers[0].number,
+          initialCards.numbers[1].number,
         ],
         double: false,
       }
     ],
     houseCards: [
-      initialCards[2].number,
+      initialCards.numbers[2].number,
     ],
     playerAddress: game.playerAddress,
     id: game.id,
     height: game.height,
   }
-  await stateStore.chain.set(`${CHAIN_STATE_POKER_GAMES}:${game.id}`,
+  await addGameToAccount(stateStore, game.id, game.playerAddress)
+  await stateStore.chain.set(`${CHAIN_STATE_POKER_GAMES}:${game.id.toString('hex')}`,
     codec.encode(GamesStateStoreSchema, newGame))
 }
 

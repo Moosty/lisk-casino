@@ -9,7 +9,7 @@ export type Numbers = Array<Number>;
 export interface ResultRng {
 	status: boolean;
 	message?: string;
-	numbers?: Numbers;
+	numbers: Numbers;
 }
 
 export class RngModule extends BaseModule {
@@ -20,18 +20,18 @@ export class RngModule extends BaseModule {
 			stateStore: StateStore,
 		): Promise<ResultRng> => {
 			const { height, min, max, amount, type = 0, superSeed } = params;
-			let seed = await stateStore.chain.get(`RNG:${height}`);
+			let seed = (await stateStore.chain.get(`RNG:${height}`))?.toString('hex');
 			if (!seed) {
 				return {
 					status: false,
 					message: `Seed not found for height ${height}`,
+					numbers: []
 				};
 			}
 			if (superSeed) {
-				// @ts-ignore
 				seed += superSeed
 			}
-			const rng: Prando = new Prando(seed.toString('hex'));
+			const rng: Prando = new Prando(seed);
 			if (type === 0) {
 				const numbers: Numbers = [];
 				const total = amount as number;
@@ -47,6 +47,7 @@ export class RngModule extends BaseModule {
 			return {
 				status: false,
 				message: `Didn't catch any prng number`,
+				numbers: []
 			};
 		},
 	};

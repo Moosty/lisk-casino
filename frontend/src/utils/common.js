@@ -1,4 +1,5 @@
 /* global BigInt */
+import { cryptography } from '@liskhq/lisk-client'
 import { objects } from '@liskhq/lisk-utils';
 import { codec } from '@liskhq/lisk-codec';
 import _ from "lodash";
@@ -60,4 +61,13 @@ export const searchByText = (collection, text, fields) => {
     }
     return false;
   });
+}
+
+export const getGameId = (address, nonce) => {
+  const nonceBuffer = Buffer.from(nonce.toString());
+  const seed = Buffer.concat([
+    address,
+    nonceBuffer,
+  ]);
+  return cryptography.hash(seed);
 }

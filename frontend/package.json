@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.2",
-    "@liskhq/lisk-client": "^5.0.4",
-    "@moosty/dao-storybook": "^0.1.70",
+    "@liskhq/lisk-client": "^5.1.1",
+    "@moosty/dao-storybook": "https://lisk.s3.nl-ams.scw.cloud/dao/dao-storybook-0.1.73-npm.tgz",
     "@tailwindcss/forms": "^0.3.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

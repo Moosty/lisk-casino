@@ -22,6 +22,7 @@ export class NewHandAsset extends BaseAsset {
   };
 
   public async apply({ asset, transaction, stateStore, reducerHandler }: ApplyAssetContext<{wager: string}>): Promise<void> {
+  	console.log(asset, transaction)
 		const newGame = createEmptyGame(
 			{
 				wager: asset.wager,
@@ -34,7 +35,7 @@ export class NewHandAsset extends BaseAsset {
 				`Game failed to created`
 			)
 		}
-		await addGame(stateStore, {reducerHandler, game: {...newGame, height: stateStore.chain.lastBlockHeaders[0].height}})
+		await addGame(stateStore, {reducerHandler, game: {...newGame, playerAddress: transaction.senderAddress, height: stateStore.chain.lastBlockHeaders[0].height}})
 		const storedGame = await findGameById(stateStore, newGame.id)
 		if (!storedGame) {
 			throw new Error(

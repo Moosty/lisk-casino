@@ -30,6 +30,7 @@ import { NewHandAsset } from "./assets/new_hand_asset";
 import { SplitAsset } from "./assets/split_asset";
 import { addGame, addGameToAccount, archiveGame, findGameById, getGameArchive, updateGame } from "./reducers/games";
 import { updateJackpot } from "./reducers/jackpot";
+import {getGameById} from "./actions/games";
 
 export class PokerModule extends BaseModule {
   public accountSchema = {
@@ -51,6 +52,7 @@ export class PokerModule extends BaseModule {
     }
   }
   public actions = {
+    getGameById: async (params) => await getGameById(this._dataAccess, params.id),
     // Example below
     // getBalance: async (params) => this._dataAccess.account.get(params.address).token.balance,
     // getBlockByID: async (params) => this._dataAccess.blocks.get(params.id),

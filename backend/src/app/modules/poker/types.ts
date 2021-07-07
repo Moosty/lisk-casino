@@ -1,7 +1,7 @@
 
 export interface Game {
   open: number;
-  wager: string;
+  wager: BigInt;
   playerHands: Array<PlayerHands>;
   houseCards: Array<number>;
   playerAddress: string;
