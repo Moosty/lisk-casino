@@ -4,7 +4,7 @@ import {Dealer} from "../components/Dealer";
 import {Player} from "../components/Player";
 import {GameControl} from "../components/GameControl";
 import {SliderInput} from "../components/SliderInput";
-import {Table} from "../components/Table";
+import {Table, TableTransactions} from "../components/TableTransactions";
 
 export const Blackjack = ({}) => {
 
@@ -48,7 +48,7 @@ export const Blackjack = ({}) => {
             </div>
           </div>
           <div className="w-3/4 bg-indigo-600 p-8 rounded-default flex flex-col space-y-4">
-            <Table/>
+            <TableTransactions/>
 
           </div>
 
