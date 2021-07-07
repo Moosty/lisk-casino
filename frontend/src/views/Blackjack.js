@@ -11,6 +11,11 @@ export const Blackjack = ({}) => {
 
   const [bet, setBet] = useState(0)
   const [balance, setBalance] = useState(10000)
+  const updateBet =(value)=>{
+    setBet(bet + value)
+    setBalance(balance - value)
+  }
+
 
   return <div  className={"h-full"}>
     <Container  className={"flex flex-col space-y-4 "}>
@@ -25,28 +30,29 @@ export const Blackjack = ({}) => {
           p-4">
             <div className="flex flex-col space-y-2">
               <Typography type="span" className="font-medium text-white">Balance</Typography>
-              <SimpleInput readOnly value={50} description descriptionMessage="test"
-                           label={"datepicker mockup"}/>
+              <SimpleInput readOnly value={balance} description descriptionMessage="test"
+                          />
             </div>
             <div className="flex flex-col space-y-2">
               <Typography type="span" className="font-medium text-white">Total Bet</Typography>
               <div className="flex flex-col">
-                <SimpleInput  placeholder placeHolder={"1lsk"} description descriptionMessage="test"
-                              label={"datepicker mockup"}/>
+                <SimpleInput  placeholder placeHolder={bet} description descriptionMessage="test"
+                             />
                 <ButtonGroup
                   className="mx-auto my-4 "
                   buttons={[
-                    {label: "1"},
-                    {label: "5"},
-                    {label: "10"},
-                    {label: "25"},
-                    {label: "50"},
+                    {label: "1", onClick:()=> updateBet(1)},
+                    {label: "5", onClick:()=> updateBet(5)},
+                    {label: "10", onClick:()=> updateBet(10)},
+                    {label: "25", onClick:()=> updateBet(25)},
                   ]}/>
               </div>
               <div className="flex flex-row space-x-2">
               <Button className="w-full" secondary label="Deal!" />
-              <Button className="w-full" secondary label="Clear" />
-              </div>
+                <Button className="w-full" onClick={() => {
+                  setBalance(balance+bet)
+                  setBet(0)
+                }} secondary label="Clear"/>              </div>
             </div>
           </div>
           <div className="w-3/4 bg-indigo-600 p-8 rounded-default flex flex-col space-y-4">
@@ -56,7 +62,6 @@ export const Blackjack = ({}) => {
 
         </div>
       </div>
-      <GameControl bet={bet} setBet={setBet} balance={balance} setBalance={setBalance} />
     </Container>
   </div>
 }
