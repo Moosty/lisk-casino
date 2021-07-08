@@ -27,8 +27,6 @@ export const Lottery = ({
   const {getClient} = useContext(AppContext);
 
 
-
-
   const updateTickets = (value) => {
     setTickets(tickets + value)
     setBalance(balance - value * 5)
@@ -70,12 +68,12 @@ export const Lottery = ({
               <Typography type="span"
                           className="font-medium text-yellow-300">{currentPricePot} LSK</Typography>
             </div>
-<div className="flex flex-col">
-<LotteryPriceNumbers currentPricePot={currentPricePot} draw={0.5} totalNumbers={4} />
-<LotteryPriceNumbers currentPricePot={currentPricePot} draw={0.3} totalNumbers={3} />
-<LotteryPriceNumbers currentPricePot={currentPricePot} draw={0.1} totalNumbers={2} />
+            <div className="flex flex-col">
+              <LotteryPriceNumbers currentPricePot={currentPricePot} draw={0.5} totalNumbers={4}/>
+              <LotteryPriceNumbers currentPricePot={currentPricePot} draw={0.3} totalNumbers={3}/>
+              <LotteryPriceNumbers currentPricePot={currentPricePot} draw={0.1} totalNumbers={2}/>
 
-</div>
+            </div>
 
 
           </div>
@@ -130,15 +128,15 @@ export const Lottery = ({
           </div>
             <div className="bg-gradient-to-r from-indigo-600  to-black
             flex flex-col w-1/3 space-y-4   rounded-default py-4 px-8">
-              <div className="flex flex-col text-24px">
-                <Typography type="span" type="span"
-                            className="font-bold text-white mb-4">Your Tickets</Typography>
-                <div className="flex flex-col space-y-4">
-                  <MyLotteryNumbers />
-                  <MyLotteryNumbers />
-                  <MyLotteryNumbers />
-                </div>
+            <div className="flex flex-col text-24px">
+              <Typography type="span" type="span"
+                          className="font-bold text-white mb-4">Your Tickets</Typography>
+              <div className="flex flex-col space-y-4">
+                <MyLotteryNumbers/>
+                <MyLotteryNumbers/>
+                <MyLotteryNumbers/>
               </div>
+            </div>
           </div>
           <div className="w-1/4 mx-auto flex flex-col">
             <div className="flex w-full flex-row space-x-4">
@@ -157,8 +155,8 @@ export const Lottery = ({
                       className="mx-auto my-4 "
                       buttons={[
                         {label: "1", onClick: () => updateTickets(1)},
-                        {label: "5", onClick: () =>  updateTickets(5)},
-                        {label: "10", onClick: () =>  updateTickets(10)},
+                        {label: "5", onClick: () => updateTickets(5)},
+                        {label: "10", onClick: () => updateTickets(10)},
                         {label: "25", onClick: () => updateTickets(25)},
                       ]}/>
                   </div>
@@ -166,24 +164,24 @@ export const Lottery = ({
                     <Typography type="span" className="font-medium text-white">Total Cost</Typography>
                     <SimpleInput readOnly value={tickets * 5} description descriptionMessage="test"
                     />
-                </div>
                   </div>
-                  <div className="flex flex-row space-x-2">
-                    <Button className="w-full" secondary label="Buy Tickets" />
-                    <Button className="w-full" onClick={() => {
-                      setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
-                      setTickets(0)
-                    }} secondary label="Clear"/>
-                    </div>
+                </div>
+                <div className="flex flex-row space-x-2">
+                  <Button className="w-full" secondary label="Buy Tickets"/>
+                  <Button className="w-full" onClick={() => {
+                    setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+                    setTickets(0)
+                  }} secondary label="Clear"/>
                 </div>
               </div>
-              {/*<div className="w-3/4 bg-gradient-to-r from-indigo-600  to-indigo-800 p-8 rounded-default flex flex-col space-y-4">*/}
-              {/*  <TableTransactions/>*/}
-              {/*</div>*/}
             </div>
+            {/*<div className="w-3/4 bg-gradient-to-r from-indigo-600  to-indigo-800 p-8 rounded-default flex flex-col space-y-4">*/}
+            {/*  <TableTransactions/>*/}
+            {/*</div>*/}
           </div>
-
         </div>
+
+      </div>
 
 
     </div>

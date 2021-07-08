@@ -9,7 +9,7 @@ export const ContentContainer = () => {
   return (
     <div className={"z-0"}>{location?.pathname === "/" && <ContentSection
       gradient
-      title="The New Way Of Crowdfunding"
+      title="Lisk Casino"
       subTitle="more transparency, more structure, more success. "
       titleContent="What would you do?"
       content="Dit is een stukje tekst.Dit is een stukje tekst.  Dit is een stukje tekst.  Dit is een stukje tekst. Dit is een stukje tekst.Dit is een stukje tekst.  Dit is een stukje tekst.  Dit is een stukje tekst.Dit is een stukje tekst.Dit is een stukje tekst.  Dit is een stukje tekst.  Dit is een stukje tekst.Dit is een stukje tekst.Dit is een stukje tekst.  Dit is een stukje tekst.  Dit is een stukje tekst.Dit is een stukje tekst.Dit is een stukje tekst.  Dit is een stukje tekst.  Dit is een stukje tekst.  "

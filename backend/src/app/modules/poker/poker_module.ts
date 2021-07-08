@@ -31,6 +31,7 @@ import { SplitAsset } from "./assets/split_asset";
 import { addGame, addGameToAccount, archiveGame, findGameById, getGameArchive, updateGame } from "./reducers/games";
 import { updateJackpot } from "./reducers/jackpot";
 import {getGameById} from "./actions/games";
+import {getJackpot} from "./actions/jackpot";
 
 export class PokerModule extends BaseModule {
   public accountSchema = {
@@ -53,6 +54,7 @@ export class PokerModule extends BaseModule {
   }
   public actions = {
     getGameById: async (params) => await getGameById(this._dataAccess, params.id),
+    getJackpot: async () => await getJackpot(this._dataAccess),
     // Example below
     // getBalance: async (params) => this._dataAccess.account.get(params.address).token.balance,
     // getBlockByID: async (params) => this._dataAccess.blocks.get(params.id),

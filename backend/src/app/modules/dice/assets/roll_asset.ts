@@ -1,4 +1,4 @@
-import { BaseAsset, ApplyAssetContext, ValidateAssetContext } from 'lisk-sdk';
+import { BaseAsset, ApplyAssetContext } from 'lisk-sdk';
 
 export class RollAsset extends BaseAsset {
 	public name = 'roll';
@@ -13,12 +13,8 @@ export class RollAsset extends BaseAsset {
 		properties: {},
   };
 
-  public validate({ asset }: ValidateAssetContext<{}>): void {
-    // Validate your asset
-  }
-
 	// eslint-disable-next-line @typescript-eslint/require-await
-  public async apply({ asset, transaction, stateStore }: ApplyAssetContext<{}>): Promise<void> {
+  public async apply({ }: ApplyAssetContext<{}>): Promise<void> {
 		throw new Error('Asset "roll" apply hook is not implemented.');
 	}
 }

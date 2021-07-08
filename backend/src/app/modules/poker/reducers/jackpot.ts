@@ -2,9 +2,9 @@ import {codec} from "lisk-sdk";
 import {ResultRng} from "../../rng/rng_module";
 import {JackpotType} from "../types";
 
-const CHAIN_STATE_POKER_JACKPOT = "poker:jackpot";
+export const CHAIN_STATE_POKER_JACKPOT = "poker:jackpot";
 
-const JackpotStateStoreSchema = {
+export const JackpotStateStoreSchema = {
   $id: "poker/jackpot",
   type: "object",
   required: ["jackpot", "luckyNumber", "history"],
@@ -70,7 +70,7 @@ export const updateJackpot = async (stateStore, reducerHandler, game) => {
     // game won jackpot
     if (BigInt(updatedJackpot.jackpot) > BigInt(0)) {
       reducerHandler.invoke("token:credit", {
-        address: game.player,
+        address: game.playerAddress,
         amount: BigInt(updatedJackpot.jackpot)
       })
     }
