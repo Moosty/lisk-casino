@@ -67,7 +67,6 @@ export const Routes = () => {
             </Route>
           </Switch>
         </div>
-        <ContentContainer />
         <Footer
           author={footerAuthor}
           items={footerItems}
