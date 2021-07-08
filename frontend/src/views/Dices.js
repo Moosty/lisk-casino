@@ -13,7 +13,7 @@ export const Dices = ({}) => {
   return (<div className="m-16">
       <Container className="w-full flex flex-col">
         <div className="flex flex-row space-x-4">
-          <div className="flex flex-col w-1/3 space-y-4 bg-indigo-600 rounded-default
+          <div className="flex flex-col w-1/3 space-y-4 bg-gradient-to-r from-indigo-600  to-indigo-800 rounded-default
           p-4">
             <div className="flex flex-col space-y-2">
               <Typography type="span" className="font-medium text-white">Roll Over</Typography>
@@ -37,7 +37,7 @@ export const Dices = ({}) => {
 <Button className="w-full" secondary label="Roll!" />
             </div>
           </div>
-          <div className="w-2/3 bg-indigo-600 p-8 rounded-default flex flex-col space-y-4">
+          <div className="w-2/3 bg-gradient-to-r from-indigo-600 justify-between  to-indigo-800 p-8 rounded-default flex flex-col space-y-4">
             <Slider
               axis="x"
               x={number}
@@ -45,7 +45,8 @@ export const Dices = ({}) => {
 setNumber(e.x >= 96 ? 96 : e.x <= 4 ? 4 : e.x)              }}
               styles={{
                 track: {
-                  backgroundColor: 'white'
+                  backgroundColor: 'white',
+                  width: '100%'
                 },
                 active: {
                   backgroundColor: 'yellow'

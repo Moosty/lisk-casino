@@ -217,7 +217,7 @@ export const Blackjack = ({account}) => {
       </div>
       <div className="w-app mx-auto flex flex-col">
         <div className="flex flex-row space-x-4">
-          <div className="flex flex-col w-1/4 space-y-4 bg-indigo-600 rounded-default
+          <div className="flex flex-col w-1/4 space-y-4 bg-gradient-to-r from-indigo-600  to-indigo-800 rounded-default
           p-4">
             <div className="flex flex-col space-y-2">
               <Typography type="span" className="font-medium text-white">Balance</Typography>
@@ -245,7 +245,7 @@ export const Blackjack = ({account}) => {
                 }} secondary label="Clear"/></div>
             </div>
           </div>
-          <div className="w-3/4 bg-indigo-600 p-8 rounded-default flex flex-col space-y-4">
+          <div className="w-3/4 bg-gradient-to-r from-indigo-600  to-indigo-800 p-8 rounded-default flex flex-col space-y-4">
             <TableTransactions/>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Header} from "../containers/Header";
 import {useHistory} from "react-router-dom";
 import {Button, ButtonGroup, Container, SimpleInput, Typography} from "@moosty/dao-storybook";
@@ -14,6 +14,8 @@ export const Lottery = ({
                           counter = "7 hrs"
                         }) => {
   const history = useHistory();
+
+  const [tickets, setTickets] = useState(0)
 
   return (<div className="w--full mx-auto space-y-8">
       <Header title="Welcome to the Lisk Lottery!"
@@ -64,7 +66,11 @@ export const Lottery = ({
           <div className="bg-gradient-to-r from-indigo-600  to-black
             flex flex-col w-1/3 space-y-4   rounded-default py-4 px-8">
             <Typography type="span" type="span"
-                        className="font-bold text-white mb-4">Buy Tickets</Typography>
+                        className="font-bold text-white text-24px mb-4">Buy Tickets</Typography>
+            <span className="flex flex-row">
+            <SimpleInput placeHolder={0} />
+              <Button secondary small label="Buy" />
+              </span>
           </div>
 
         </div>
