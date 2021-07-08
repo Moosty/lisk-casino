@@ -16,7 +16,7 @@ export const Dices = ({}) => {
           <div className="flex flex-col w-1/3 space-y-4 bg-gradient-to-r from-indigo-600  to-indigo-800 rounded-default
           p-4">
             <div className="flex flex-col space-y-2">
-              <Typography type="span" className="font-medium text-white">Roll Over</Typography>
+              <Typography type="span" className="font-medium text-white">Roll Under</Typography>
               <SimpleInput readOnly value={number} description descriptionMessage="test"
                            label={"datepicker mockup"}/>
             </div>

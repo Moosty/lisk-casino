@@ -60,7 +60,7 @@ export const updateJackpot = async (stateStore, reducerHandler, game) => {
     }
   const luckyNumber: ResultRng = await reducerHandler.invoke('rng:getNumber', {
     min: 0,
-    max: 1000000,
+    max: 100,
     height: game.height,
     type: 0,
     amount: 2,
