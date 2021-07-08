@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Header} from "../containers/Header";
 import {useHistory} from "react-router-dom";
 import {Button, ButtonGroup, Container, SimpleInput, Typography} from "@moosty/dao-storybook";
@@ -6,6 +6,9 @@ import {SliderInput} from "../components/SliderInput";
 import {LotteryPriceNumbers} from "../components/LotteryPriceNumbers";
 import {MyLotteryNumbers} from "../components/MyLotteryNumbers";
 import {transactions} from "@liskhq/lisk-client";
+import {AppContext} from "../appContext";
+import {Buffer} from '@liskhq/lisk-client'
+
 
 export const Lottery = ({
                           nextDrawNumber = 1,
@@ -13,13 +16,28 @@ export const Lottery = ({
                           currentPricePot = "895",
                           ticketNumber = 500,
                           counter = "7 hrs",
+                          account = 30
 
                         }) => {
   const history = useHistory();
   const [balance, setBalance] = useState(0)
-
-
   const [tickets, setTickets] = useState(0)
+  const {getClient} = useContext(AppContext);
+
+
+
+
+  const updateTickets = (value) => {
+    setTickets(tickets + value)
+    setBalance(balance - value * 5)
+  }
+
+  useEffect(() => {
+    if (account?.chain?.token?.balance && balance === 0) {
+      setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+    }
+  }, [account])
+
 
   return (<div className="w--full mx-auto space-y-8">
       <Header title="Welcome to the Lisk Lottery!"
@@ -79,23 +97,28 @@ export const Lottery = ({
                 <div className="flex flex-col space-y-2">
                   <Typography type="span" className="font-medium text-white">Total Tickets</Typography>
                   <div className="flex flex-col">
-                    <SimpleInput readOnly placeholder placeHolder={10} description descriptionMessage="test"/>
+                    <SimpleInput readOnly placeholder placeHolder={tickets} description descriptionMessage="test"/>
                     <ButtonGroup
                       className="mx-auto my-4 "
                       buttons={[
-                        {label: "1", onClick: () => (1)},
-                        {label: "5", onClick: () => (5)},
-                        {label: "10", onClick: () => (10)},
-                        {label: "25", onClick: () => (25)},
+                        {label: "1", onClick: () => updateTickets(1)},
+                        {label: "5", onClick: () =>  updateTickets(5)},
+                        {label: "10", onClick: () =>  updateTickets(10)},
+                        {label: "25", onClick: () => updateTickets(25)},
                       ]}/>
                   </div>
                   <div className="flex flex-col space-y-2">
                     <Typography type="span" className="font-medium text-white">Total Cost</Typography>
-                    <SimpleInput readOnly value={balance} description descriptionMessage="test"
+                    <SimpleInput readOnly value={tickets * 5} description descriptionMessage="test"
                     />
+                </div>
                   </div>
                   <div className="flex flex-row space-x-2">
                     <Button className="w-full" secondary label="Buy Tickets" />
+                    <Button className="w-full" onClick={() => {
+                      setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+                      setTickets(0)
+                    }} secondary label="Clear"/>
                     </div>
                 </div>
               </div>
@@ -108,7 +131,6 @@ export const Lottery = ({
         </div>
 
 
-      </div>
     </div>
   )
 }
