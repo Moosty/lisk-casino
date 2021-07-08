@@ -44,10 +44,7 @@ export const NavBarContainer = ({onLoginClick, onRegisterClick, onSignOut, user,
         current: '/top-list' === location.pathname,
       },
     ],
-    ctaButton: <div className="text-white">
-      <span className="mx-3">{user?.chain?.sprinkler?.username}</span>
-      <span>{user?.chain?.token?.balance && transactions.convertBeddowsToLSK(user?.chain?.token?.balance.toString())} LSK</span>
-    </div>,
+    ctaButton: <div />,
     userNavigation: [
       {name: 'Sign out', href: () => onSignOut()},
     ],
@@ -86,7 +83,7 @@ export const NavBarContainer = ({onLoginClick, onRegisterClick, onSignOut, user,
 
   return (<NavBar
     {...navBarArgs}
-    ctaButton={<div className="text-white">
+    ctaButton={<div className="text-white flex flex-col font-medium flex-end text-right">
       <span className="mx-3">{user?.chain?.sprinkler?.username}</span>
       <span>{user?.chain?.token?.balance && transactions.convertBeddowsToLSK(user?.chain?.token?.balance.toString())} LSK</span>
     </div>}

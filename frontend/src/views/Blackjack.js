@@ -201,9 +201,9 @@ export const Blackjack = ({account}) => {
     setBalance(balance - value)
   }
 
-  return <div className={"h-full"}>
-    <Container className={"flex flex-col space-y-4 "}>
-      <div style={{backgroundColor: "#114602"}} className="w-app mx-auto rounded-default mt-16 p-8 space-y-8 ">
+  return <div className={"h-full w-app mx-auto"}>
+    <Container className={"w-full flex flex-row space-x-4 mt-8 "}>
+      <div style={{backgroundColor: "#114602"}} className="w-3/4 mx-auto rounded-default  p-8 space-y-8 ">
         {game && <Dealer cards={game.houseCards} result={5}/>}
         {game && <Player
           onDouble={onDouble}
@@ -215,9 +215,9 @@ export const Blackjack = ({account}) => {
           result={6}
         />}
       </div>
-      <div className="w-app mx-auto flex flex-col">
-        <div className="flex flex-row space-x-4">
-          <div className="flex flex-col w-1/4 space-y-4 bg-gradient-to-r from-indigo-600  to-indigo-800 rounded-default
+      <div className="w-1/4 mx-auto flex flex-col">
+        <div className="flex w-full flex-row space-x-4">
+          <div className="flex w-full flex-col  space-y-4 bg-gradient-to-r from-indigo-600  to-indigo-800 rounded-default
           p-4">
             <div className="flex flex-col space-y-2">
               <Typography type="span" className="font-medium text-white">Balance</Typography>
@@ -245,11 +245,12 @@ export const Blackjack = ({account}) => {
                 }} secondary label="Clear"/></div>
             </div>
           </div>
-          <div className="w-3/4 bg-gradient-to-r from-indigo-600  to-indigo-800 p-8 rounded-default flex flex-col space-y-4">
-            <TableTransactions/>
-          </div>
+          {/*<div className="w-3/4 bg-gradient-to-r from-indigo-600  to-indigo-800 p-8 rounded-default flex flex-col space-y-4">*/}
+          {/*  <TableTransactions/>*/}
+          {/*</div>*/}
         </div>
       </div>
+
     </Container>
   </div>
 }
