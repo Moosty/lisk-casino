@@ -14,9 +14,11 @@ export const Lottery = ({
                           nextDrawNumber = 1,
                           nextDrawDate = "10-07-2021",
                           currentPricePot = "895",
+                          previousPricePot= 860,
                           ticketNumber = 500,
                           counter = "7 hrs",
-                          account = 30
+                          account = 30,
+
 
                         }) => {
   const history = useHistory();
@@ -43,6 +45,10 @@ export const Lottery = ({
       <Header title="Welcome to the Lisk Lottery!"
               subTitle="Get your tickets now!"
               gradient/>
+      <div className="w-app mx-auto flex flex-row bg-gradient-to-r from-green-600  to-green-800 rounded-default py-2 px-4 justify-between items-center">
+        <span className="font-medium text-white text-18px flex items-center ">AMAZING! You won <span className="mx-4 text-yellow-300 font-medium text-32px">766.990 LSK</span>in the lottery! </span>
+        <Button label="Claim" />
+      </div>
 
       <div className="w-app mx-auto mb-8">
         <div className="flex flex-row space-x-4 mb-8">
@@ -70,6 +76,55 @@ export const Lottery = ({
 <LotteryPriceNumbers currentPricePot={currentPricePot} draw={0.1} totalNumbers={2} />
 
 </div>
+
+
+          </div>
+
+          {/*LAST DRAW*/}
+          <div className="bg-gradient-to-r from-indigo-600  to-indigo-800
+          flex flex-col w-1/3 space-y-4  rounded-default py-4 px-8">
+
+            <div className="flex flex-row space-x-4 text-24px">
+              <Typography type="span" type="span"
+                          className="font-bold text-white">Round #{nextDrawNumber} | {nextDrawDate}</Typography>
+            </div>
+            <div className="flex flex-col space-y-4">
+              <span className="font-medium text-white">Winning Numbers:</span>
+              <div className="flex flex-row space-x-4">
+                <MyLotteryNumbers />
+
+
+              </div>
+            </div>
+            <div className="flex flex-col space-y-2">
+              <span className="font-medium text-white">Total Pricepool:</span>
+                <span className="text-yellow-300 font-bold text-32px">{previousPricePot}</span>
+
+            </div>
+            <div className="flex flex-col space-y-4">
+              <div className="flex flex-row justify-between">
+                <div className="flex flex-col space-y-4">
+                  <span className="font-medium text-white ">No. Matched</span>
+                  <span className="text-yellow-300 font-bold text-24px">4</span>
+                  <span className="text-yellow-300 font-bold text-24px">3</span>
+                  <span className="text-yellow-300 font-bold text-24px">2</span>
+                </div>
+                <div className="flex flex-col space-y-4">
+                  <span className="font-medium text-white  ">Winners</span>
+                  <span className="font-medium text-white text-24px">4</span>
+                  <span className="font-medium text-white text-24px">12</span>
+                  <span className="font-medium text-white text-24px">35</span>
+                </div>
+                <div className="flex flex-col space-y-4 text-right">
+                  <span className="font-medium text-white ">Prize Pool</span>
+                  <span className="font-medium text-white text-24px ">{previousPricePot * 0.5} LSK</span>
+                  <span className="font-medium text-white text-24px">{previousPricePot * 0.3}  LSK</span>
+                  <span className="font-medium text-white text-24px">{previousPricePot * 0.1}  LSK</span>
+                </div>
+
+              </div>
+            </div>
+
 
 
           </div>
