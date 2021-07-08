@@ -11,7 +11,7 @@
 	"rpc": {
 		"enable": true,
 		"mode": "ws",
-		"port": 8080
+		"port": 8889
 	},
 	"genesisConfig": {
 		"blockTime": 5,
