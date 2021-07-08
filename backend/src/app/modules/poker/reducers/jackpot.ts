@@ -52,13 +52,12 @@ const JackpotStateStoreSchema = {
 
 export const updateJackpot = async (stateStore, reducerHandler, game) => {
   const jackpotStoreBuffer = await stateStore.chain.get(`${CHAIN_STATE_POKER_JACKPOT}`);
-  const jackpotStore: JackpotType = codec.decode(JackpotStateStoreSchema, jackpotStoreBuffer)
-  let defaultJackpot: JackpotType = {
-    jackpot: BigInt(0),
-    luckyNumber: 1,
-    history: [],
-  };
-  const updatedJackpot: JackpotType = jackpotStore || defaultJackpot
+  const updatedJackpot: JackpotType = jackpotStoreBuffer ?
+    codec.decode(JackpotStateStoreSchema, jackpotStoreBuffer) : {
+      jackpot: BigInt(0),
+      luckyNumber: 1,
+      history: [],
+    }
   const luckyNumber: ResultRng = await reducerHandler.invoke('rng:getNumber', {
     min: 0,
     max: 1000000,

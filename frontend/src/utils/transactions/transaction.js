@@ -64,5 +64,5 @@ export const createTransaction = async ({
     result.status = false;
     result.message = message;
   }
-  return {...result, nonce: tx.nonce};
+  return {...result, nonce: tx?.nonce};
 }

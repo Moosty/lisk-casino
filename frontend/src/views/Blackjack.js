@@ -12,7 +12,7 @@ import {AppContext} from "../appContext";
 export const Blackjack = ({account}) => {
   const {getClient} = useContext(AppContext);
   const [bet, setBet] = useState(0)
-  const [balance, setBalance] = useState(10000)
+  const [balance, setBalance] = useState(0)
   const [game, setGame] = useState(null)
   const [activeGameId, setActiveGameId] = useState(null)
   const [loadingCreate, setLoadingCreate] = useState(false);
@@ -29,8 +29,10 @@ export const Blackjack = ({account}) => {
   }, [activeGameId])
 
   useEffect(() => {
-    console.log(game,12)
-  }, [game])
+    if (account?.chain?.token?.balance && balance === 0) {
+      setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+    }
+  }, [account])
 
   const onStand = async (hand) => {
     const client = await getClient
@@ -238,7 +240,7 @@ export const Blackjack = ({account}) => {
               <div className="flex flex-row space-x-2">
                 <Button className="w-full" secondary label="Deal!" onClick={startNewGame} disabled={game?.open === 1} />
                 <Button className="w-full" onClick={() => {
-                  setBalance(balance + bet)
+                  setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
                   setBet(0)
                 }} secondary label="Clear"/></div>
             </div>
