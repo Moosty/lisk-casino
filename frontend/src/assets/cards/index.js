@@ -1,4 +1,3 @@
-
 import B1 from "./1B.svg"
 import B2 from "./2B.svg"
 import H2 from "./2H.svg"
@@ -58,10 +57,6 @@ import DQ from "./QD.svg"
 import DK from "./KD.svg"
 import DA from "./AD.svg"
 
-
-
-
-
 export {
   B1,
   B2,
@@ -93,8 +88,6 @@ export {
   SK,
   SA,
 
-
-
   D2,
   D3,
   D4,
@@ -122,9 +115,4 @@ export {
   CQ,
   CK,
   CA,
-
-
-
-
 }
-

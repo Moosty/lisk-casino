@@ -73,9 +73,10 @@ export class DoubleAsset extends BaseAsset {
 			superSeed: game.id,
 		});
 
-		game.playerHands[asset.hand].cards.push(randomCard[0].number)
+		game.playerHands[asset.hand].cards.push(randomCard.numbers[0].number)
 		game.playerHands[asset.hand].state = "hold"
 		game.playerHands[asset.hand].double = true
+		game.playerHands[asset.hand].count = getHandCount(game.playerHands[asset.hand].cards)
 
 		reducerHandler.invoke("token:debit", {
 			address: transaction.senderAddress,

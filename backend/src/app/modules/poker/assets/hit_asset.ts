@@ -73,9 +73,9 @@ export class HitAsset extends BaseAsset {
 			superSeed: game.id,
 		});
 
-		game.playerHands[asset.hand].cards.push(randomCard[0].number)
-
-		if (getHandCount(game.playerHands[asset.hand].cards) >= 21) {
+		game.playerHands[asset.hand].cards.push(randomCard.numbers[0].number)
+		game.playerHands[asset.hand].count = getHandCount(game.playerHands[asset.hand].cards)
+		if (game.playerHands[asset.hand].count >= 21) {
 			game.playerHands[asset.hand].state = "hold"
 		}
 

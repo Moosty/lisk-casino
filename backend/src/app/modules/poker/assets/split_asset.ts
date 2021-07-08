@@ -2,6 +2,8 @@ import { BaseAsset, ApplyAssetContext } from 'lisk-sdk';
 import {Game} from "../types";
 import {updateGame} from "../reducers/games";
 import {blackjackDeck} from "../constants";
+import {getHandCount} from "../game";
+import {ResultRng} from "../../rng/rng_module";
 
 export class SplitAsset extends BaseAsset {
 	public name = 'split';
@@ -63,16 +65,28 @@ export class SplitAsset extends BaseAsset {
 			)
 		}
 
+		const randomCards: ResultRng = await reducerHandler.invoke('rng:getNumber', {
+			min: 0,
+			max: 51,
+			height: stateStore.chain.lastBlockHeaders[0].height,
+			type: 0,
+			amount: 2,
+			superSeed: game.id,
+		});
+
 		game.playerHands.push({
 			id: game.playerHands[game.playerHands.length - 1].id + 1,
 			state: "undecided",
 			cards: [
-				game.playerHands[asset.hand].cards[1]
+				game.playerHands[asset.hand].cards[1],
+				randomCards.numbers[0].number,
 			],
 			double: false,
+			count: getHandCount([game.playerHands[asset.hand].cards[1], randomCards.numbers[0].number])
 		})
 
-		delete game.playerHands[asset.hand].cards[1]
+		game.playerHands[asset.hand].cards = [game.playerHands[asset.hand].cards[0], randomCards.numbers[1].number]
+		game.playerHands[asset.hand].count = getHandCount(game.playerHands[asset.hand].cards)
 
 		reducerHandler.invoke("token:debit", {
 			address: transaction.senderAddress,

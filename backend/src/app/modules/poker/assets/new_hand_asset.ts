@@ -22,7 +22,6 @@ export class NewHandAsset extends BaseAsset {
   };
 
   public async apply({ asset, transaction, stateStore, reducerHandler }: ApplyAssetContext<{wager: string}>): Promise<void> {
-  	console.log(asset, transaction)
 		const newGame = createEmptyGame(
 			{
 				wager: asset.wager,
@@ -42,5 +41,9 @@ export class NewHandAsset extends BaseAsset {
 				`Game failed to save`
 			)
 		}
+		await reducerHandler.invoke("token:debit", {
+			address: transaction.senderAddress,
+			amount: asset.wager,
+		})
 	}
 }

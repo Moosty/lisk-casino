@@ -23,19 +23,30 @@ export const endGame = async (stateStore, reducerHandler, game, transaction): Pr
       lost += BigInt(updatedGame.wager) * BigInt(hand.double ? 2 : 1)
     }
   })
-  reducerHandler.invoke("token:credit", {
-    address: transaction.senderAddress,
-    amount: won
-  })
+  console.log(updatedGame, 111222333, won, lost)
+  if (won > BigInt(0)) {
+    reducerHandler.invoke("token:credit", {
+      address: transaction.senderAddress,
+      amount: won
+    })
+  }
   // todo: treasury address
-  reducerHandler.invoke("token:credit", {
-    address: Buffer.from("55d877e266e24a99d338163b512077b8609ba9b1"),
-    amount: lost
-  })
+  if (lost > BigInt(0)) {
+    reducerHandler.invoke("token:credit", {
+      address: Buffer.from("55d877e266e24a99d338163b512077b8609ba9b1", 'hex'),
+      amount: lost
+    })
+  }
+  console.log(updatedGame)
   updatedGame.open = 0
   await updateGame(stateStore, updatedGame)
+  console.log(123)
   await archiveGame(stateStore, updatedGame.id, transaction.senderAddress)
+  console.log(234)
+
   await updateJackpot(stateStore, reducerHandler, game)
+  console.log(345)
+
 }
 
 export const decideGame = (game: Game): Game => {
@@ -78,7 +89,7 @@ export const dealerCardPicker = async (stateStore, reducerHandler, game: Game): 
   let currentPick = 0;
   while (!done) {
     if (count < 17) {
-      const nextCard = randomCards[currentPick].number;
+      const nextCard = randomCards.numbers[currentPick].number;
       cards.push(nextCard)
       currentPick++;
       count += blackjackDeck[nextCard];
@@ -86,7 +97,7 @@ export const dealerCardPicker = async (stateStore, reducerHandler, game: Game): 
     if (count > 21 && handContainsAce(cards)) {
       const aceIsOneCount = cards.reduce((sum, card) => sum + (blackjackDeck[card] === 11 ? 1 : blackjackDeck[card]))
       if (aceIsOneCount < 17) {
-        const nextCard = randomCards[currentPick].number;
+        const nextCard = randomCards.numbers[currentPick].number;
         cards.push(nextCard)
         currentPick++;
         count = aceIsOneCount + blackjackDeck[nextCard];

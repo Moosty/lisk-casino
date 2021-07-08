@@ -64,6 +64,7 @@ export class HoldAsset extends BaseAsset {
 		} else {
 			await updateGame(stateStore, game)
 		}
+		console.log(123123123123123123)
 	}
 
 }

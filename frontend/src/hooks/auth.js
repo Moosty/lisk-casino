@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {createTransaction} from "../utils/transactions";
 import {AppContext} from "../appContext";
-import {Buffer} from "@liskhq/lisk-client";
 import {useBlocks} from "./blocks";
 
 export const useAuth = (closeModal) => {
@@ -28,7 +27,7 @@ export const useAuth = (closeModal) => {
       setAccount({...account, name: foundAccount.sprinkler.username, chain: foundAccount})
     }
     if (account) {
-      updateAccount()
+      updateAccount();
     }
   }, [height])
 

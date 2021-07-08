@@ -14,4 +14,19 @@ export interface PlayerHands {
   state: string;
   cards: Array<number>;
   double: boolean;
+  count: number;
+}
+
+export interface JackpotType {
+  jackpot: BigInt;
+  luckyNumber: number;
+  history: Array<JackpotHistory>;
+}
+
+export interface JackpotHistory {
+  nonce: number;
+  winner: any;
+  id: any;
+  amount: any;
+  height: number;
 }

@@ -1,5 +1,6 @@
 import {codec, cryptography} from "lisk-sdk";
 import {ResultRng} from "../../rng/rng_module";
+import {blackjackDeck} from "../constants";
 
 export const CHAIN_STATE_POKER_GAMES = "poker:games";
 export const CHAIN_STATE_POKER_PLAYER = "poker:archive";
@@ -38,7 +39,7 @@ export const GamesStateStoreSchema = {
       type: "array",
       items: {
         type: "object",
-        required: ["id", "cards", "state"],
+        required: ["id", "cards", "state", "double", "count"],
         properties: {
           id: {
             fieldNumber: 1,
@@ -60,6 +61,10 @@ export const GamesStateStoreSchema = {
             fieldNumber: 4,
             dataType: "boolean",
             default: false,
+          },
+          count: {
+            fieldNumber: 5,
+            dataType: "uint32",
           }
         }
       }
@@ -115,7 +120,7 @@ export const updateGame = async (stateStore, game) => {
       `Game not found`
     )
   }
-  await stateStore.chain.set(`${CHAIN_STATE_POKER_GAMES}:${game.id}`,
+  await stateStore.chain.set(`${CHAIN_STATE_POKER_GAMES}:${game.id.toString('hex')}`,
     codec.encode(GamesStateStoreSchema, game))
 }
 
@@ -153,6 +158,7 @@ export const addGame = async (stateStore, {reducerHandler, game}) => {
           initialCards.numbers[1].number,
         ],
         double: false,
+        count: blackjackDeck[initialCards.numbers[0].number] + blackjackDeck[initialCards.numbers[1].number],
       }
     ],
     houseCards: [

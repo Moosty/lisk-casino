@@ -1,5 +1,6 @@
 import {codec} from "lisk-sdk";
 import {ResultRng} from "../../rng/rng_module";
+import {JackpotType} from "../types";
 
 const CHAIN_STATE_POKER_JACKPOT = "poker:jackpot";
 
@@ -50,13 +51,14 @@ const JackpotStateStoreSchema = {
 }
 
 export const updateJackpot = async (stateStore, reducerHandler, game) => {
-  const jackpotStore = await stateStore.chain.get(`${CHAIN_STATE_POKER_JACKPOT}`);
-  let defaultJackpot = {
-    jackpot: "0",
+  const jackpotStoreBuffer = await stateStore.chain.get(`${CHAIN_STATE_POKER_JACKPOT}`);
+  const jackpotStore: JackpotType = codec.decode(JackpotStateStoreSchema, jackpotStoreBuffer)
+  let defaultJackpot: JackpotType = {
+    jackpot: BigInt(0),
     luckyNumber: 1,
     history: [],
   };
-  const updatedJackpot = jackpotStore || defaultJackpot
+  const updatedJackpot: JackpotType = jackpotStore || defaultJackpot
   const luckyNumber: ResultRng = await reducerHandler.invoke('rng:getNumber', {
     min: 0,
     max: 1000000,
@@ -67,22 +69,24 @@ export const updateJackpot = async (stateStore, reducerHandler, game) => {
   });
   if (luckyNumber && luckyNumber.numbers && luckyNumber.numbers[0].number === updatedJackpot.luckyNumber) {
     // game won jackpot
-    reducerHandler.invoke("token:credit", {
-      address: game.player,
-      amount: BigInt(updatedJackpot.jackpot)
-    })
+    if (BigInt(updatedJackpot.jackpot) > BigInt(0)) {
+      reducerHandler.invoke("token:credit", {
+        address: game.player,
+        amount: BigInt(updatedJackpot.jackpot)
+      })
+    }
 
     updatedJackpot.history.push({
       nonce: updatedJackpot.history.sort((a, b) => a.nonce - b.nonce)[0].nonce + 1,
       winner: game.playerAddress,
       id: game.id,
-      amount: updatedJackpot.jackpot,
+      amount: BigInt(updatedJackpot.jackpot),
       height: game.height,
     })
-    updatedJackpot.jackpot = "0";
+    updatedJackpot.jackpot = BigInt(0);
     updatedJackpot.luckyNumber = luckyNumber.numbers[1].number
   } else {
-    updatedJackpot.jackpot = BigInt(updatedJackpot.jackpot) + (((BigInt(game.wager) * BigInt(100)) / BigInt(20)) / BigInt(100))
+    updatedJackpot.jackpot = BigInt(updatedJackpot.jackpot ? updatedJackpot.jackpot : 0) + (((BigInt(game.wager) * BigInt(100)) / BigInt(10)) / BigInt(100))
   }
   await stateStore.chain.set(
     `${CHAIN_STATE_POKER_JACKPOT}`,

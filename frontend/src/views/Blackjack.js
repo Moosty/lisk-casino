@@ -1,5 +1,5 @@
 /* global BigInt */
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Button, ButtonGroup, Container, SimpleInput, Typography} from "@moosty/dao-storybook";
 import {Dealer} from "../components/Dealer";
 import {Player} from "../components/Player";
@@ -7,8 +7,8 @@ import {TableTransactions} from "../components/TableTransactions";
 import {Buffer, transactions} from '@liskhq/lisk-client'
 import {getGameId} from "../utils/common";
 import {createTransaction} from "../utils/transactions";
-import {transactionStates} from "@moosty/dao-storybook/dist/stories/modals/templates/resultTransaction";
 import {AppContext} from "../appContext";
+
 export const Blackjack = ({account}) => {
   const {getClient} = useContext(AppContext);
   const [bet, setBet] = useState(0)
@@ -17,9 +17,151 @@ export const Blackjack = ({account}) => {
   const [activeGameId, setActiveGameId] = useState(null)
   const [loadingCreate, setLoadingCreate] = useState(false);
 
+  useEffect(() => {
+    const getGame = async () => {
+      const client = await getClient
+      setGame(await client.invoke('poker:getGameById', {id: activeGameId}))
+    }
+    if (activeGameId) {
+      // setTimeout(() => getGame(), 300)
+      getGame()
+    }
+  }, [activeGameId])
+
+  useEffect(() => {
+    console.log(game,12)
+  }, [game])
+
+  const onStand = async (hand) => {
+    const client = await getClient
+    try {
+      const result = await createTransaction({
+        moduleId: 8890,
+        assetId: 2,
+        assets: {
+          gameId: Buffer.from(activeGameId, 'hex'),
+          hand: game.playerHands.findIndex(h => h.id === hand),
+        },
+        account,
+        client,
+      })
+      if (result.status) {
+        const findTransaction = async () => {
+          try {
+            await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
+            setGame(await client.invoke('poker:getGameById', {id: activeGameId}))
+          } catch (e) {
+            setTimeout(async () => await findTransaction(), 1000)
+          }
+        }
+        await findTransaction()
+      } else {
+        setLoadingCreate(false)
+        console.log(result)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const onHit = async (hand) => {
+    const client = await getClient
+    try {
+      const result = await createTransaction({
+        moduleId: 8890,
+        assetId: 1,
+        assets: {
+          gameId: Buffer.from(activeGameId, 'hex'),
+          hand: game.playerHands.findIndex(h => h.id === hand),
+        },
+        account,
+        client,
+      })
+      if (result.status) {
+        const findTransaction = async () => {
+          try {
+            await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
+            setGame(await client.invoke('poker:getGameById', {id: activeGameId}))
+          } catch (e) {
+            setTimeout(async () => await findTransaction(), 1000)
+          }
+        }
+        await findTransaction()
+      } else {
+        setLoadingCreate(false)
+        console.log(result)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const onSplit = async (hand) => {
+    const client = await getClient
+    try {
+      const result = await createTransaction({
+        moduleId: 8890,
+        assetId: 3,
+        assets: {
+          gameId: Buffer.from(activeGameId, 'hex'),
+          hand: game.playerHands.findIndex(h => h.id === hand),
+        },
+        account,
+        client,
+      })
+      if (result.status) {
+        const findTransaction = async () => {
+          try {
+            await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
+            setGame(await client.invoke('poker:getGameById', {id: activeGameId}))
+          } catch (e) {
+            setTimeout(async () => await findTransaction(), 1000)
+          }
+        }
+        await findTransaction()
+      } else {
+        setLoadingCreate(false)
+        console.log(result)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const onDouble = async (hand) => {
+    const client = await getClient
+    try {
+      const result = await createTransaction({
+        moduleId: 8890,
+        assetId: 4,
+        assets: {
+          gameId: Buffer.from(activeGameId, 'hex'),
+          hand: game.playerHands.findIndex(h => h.id === hand),
+        },
+        account,
+        client,
+      })
+      if (result.status) {
+        const findTransaction = async () => {
+          try {
+            await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
+            setGame(await client.invoke('poker:getGameById', {id: activeGameId}))
+          } catch (e) {
+            setTimeout(async () => await findTransaction(), 1000)
+          }
+        }
+        await findTransaction()
+      } else {
+        setLoadingCreate(false)
+        console.log(result)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   const startNewGame = async () => {
     const client = await getClient
-
     setLoadingCreate(true)
     try {
       const result = await createTransaction({
@@ -57,12 +199,19 @@ export const Blackjack = ({account}) => {
     setBalance(balance - value)
   }
 
-
   return <div className={"h-full"}>
     <Container className={"flex flex-col space-y-4 "}>
       <div style={{backgroundColor: "#114602"}} className="w-app mx-auto rounded-default mt-16 p-8 space-y-8 ">
-        {activeGameId && <Dealer activeGameId={activeGameId} result={5}/>}
-        {activeGameId && <Player activeGameId={activeGameId} bet={bet} result={6}/>}
+        {game && <Dealer cards={game.houseCards} result={5}/>}
+        {game && <Player
+          onDouble={onDouble}
+          onSplit={onSplit}
+          onHit={onHit}
+          onStand={onStand}
+          hands={game.playerHands}
+          bet={bet}
+          result={6}
+        />}
       </div>
       <div className="w-app mx-auto flex flex-col">
         <div className="flex flex-row space-x-4">
@@ -87,7 +236,7 @@ export const Blackjack = ({account}) => {
                   ]}/>
               </div>
               <div className="flex flex-row space-x-2">
-                <Button className="w-full" secondary label="Deal!" onClick={startNewGame} />
+                <Button className="w-full" secondary label="Deal!" onClick={startNewGame} disabled={game?.open === 1} />
                 <Button className="w-full" onClick={() => {
                   setBalance(balance + bet)
                   setBet(0)
