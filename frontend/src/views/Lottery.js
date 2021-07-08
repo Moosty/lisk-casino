@@ -1,21 +1,43 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Header} from "../containers/Header";
 import {useHistory} from "react-router-dom";
 import {Button, ButtonGroup, Container, SimpleInput, Typography} from "@moosty/dao-storybook";
 import {SliderInput} from "../components/SliderInput";
 import {LotteryPriceNumbers} from "../components/LotteryPriceNumbers";
 import {MyLotteryNumbers} from "../components/MyLotteryNumbers";
+import {transactions} from "@liskhq/lisk-client";
+import {AppContext} from "../appContext";
+import {Buffer} from '@liskhq/lisk-client'
+
 
 export const Lottery = ({
                           nextDrawNumber = 1,
                           nextDrawDate = "10-07-2021",
                           currentPricePot = "895",
                           ticketNumber = 500,
-                          counter = "7 hrs"
+                          counter = "7 hrs",
+                          account = 30
+
                         }) => {
   const history = useHistory();
-
+  const [balance, setBalance] = useState(0)
   const [tickets, setTickets] = useState(0)
+  const {getClient} = useContext(AppContext);
+
+
+
+
+  const updateTickets = (value) => {
+    setTickets(tickets + value)
+    setBalance(balance - value * 5)
+  }
+
+  useEffect(() => {
+    if (account?.chain?.token?.balance && balance === 0) {
+      setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+    }
+  }, [account])
+
 
   return (<div className="w--full mx-auto space-y-8">
       <Header title="Welcome to the Lisk Lottery!"
@@ -63,20 +85,52 @@ export const Lottery = ({
                 </div>
               </div>
           </div>
-          <div className="bg-gradient-to-r from-indigo-600  to-black
-            flex flex-col w-1/3 space-y-4   rounded-default py-4 px-8">
-            <Typography type="span" type="span"
-                        className="font-bold text-white text-24px mb-4">Buy Tickets</Typography>
-            <span className="flex flex-row">
-            <SimpleInput placeHolder={0} />
-              <Button secondary small label="Buy" />
-              </span>
+          <div className="w-1/4 mx-auto flex flex-col">
+            <div className="flex w-full flex-row space-x-4">
+              <div className="flex w-full flex-col  space-y-4 bg-gradient-to-r from-indigo-600  to-indigo-800 rounded-default
+          p-4">
+                <div className="flex flex-col space-y-2">
+                  <Typography type="span" className="font-medium text-white">Balance</Typography>
+                  <SimpleInput readOnly value={balance} description descriptionMessage="test"
+                  />
+                </div>
+                <div className="flex flex-col space-y-2">
+                  <Typography type="span" className="font-medium text-white">Total Tickets</Typography>
+                  <div className="flex flex-col">
+                    <SimpleInput readOnly placeholder placeHolder={tickets} description descriptionMessage="test"/>
+                    <ButtonGroup
+                      className="mx-auto my-4 "
+                      buttons={[
+                        {label: "1", onClick: () => updateTickets(1)},
+                        {label: "5", onClick: () =>  updateTickets(5)},
+                        {label: "10", onClick: () =>  updateTickets(10)},
+                        {label: "25", onClick: () => updateTickets(25)},
+                      ]}/>
+                  </div>
+                  <div className="flex flex-col space-y-2">
+                    <Typography type="span" className="font-medium text-white">Total Cost</Typography>
+                    <SimpleInput readOnly value={tickets * 5} description descriptionMessage="test"
+                    />
+                </div>
+                  </div>
+                  <div className="flex flex-row space-x-2">
+                    <Button className="w-full" secondary label="Buy Tickets" />
+                    <Button className="w-full" onClick={() => {
+                      setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+                      setTickets(0)
+                    }} secondary label="Clear"/>
+                    </div>
+                </div>
+              </div>
+              {/*<div className="w-3/4 bg-gradient-to-r from-indigo-600  to-indigo-800 p-8 rounded-default flex flex-col space-y-4">*/}
+              {/*  <TableTransactions/>*/}
+              {/*</div>*/}
+            </div>
           </div>
 
         </div>
 
 
-      </div>
     </div>
   )
 }

@@ -38,6 +38,8 @@ export const Dices = ({}) => {
             </div>
           </div>
           <div className="w-2/3 bg-gradient-to-r from-indigo-600 justify-between  to-indigo-800 p-8 rounded-default flex flex-col space-y-4">
+            <div className="block bg-yellow-500 rounded-full h-30 w-30 text-white font-medium
+            " >10</div>
             <Slider
               axis="x"
               x={number}
