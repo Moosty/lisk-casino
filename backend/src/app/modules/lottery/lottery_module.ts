@@ -104,8 +104,8 @@ export class LotteryModule extends BaseModule {
   }
 
   public async afterBlockApply(_input: AfterBlockApplyContext) {
-    if (_input.block.header.height % 1000 === 0) {
-      const round = Math.floor((_input.block.header.height - 1) / 1000)
+    if (_input.block.header.height % 100 === 0) {
+      const round = Math.floor((_input.block.header.height - 1) / 100)
       const lotteryNumbers: ResultRng = await _input.reducerHandler.invoke('rng:getNumber', {
         min: 0,
         max: 99,
@@ -158,6 +158,7 @@ export class LotteryModule extends BaseModule {
           amount: charity
         })
       }
+      roundData.state = "resolved"
       await updateRound({stateStore: _input.stateStore, round: roundData})
     }
     // Get any data from stateStore using block info, below is an example getting a generator
