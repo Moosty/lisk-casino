@@ -29,6 +29,7 @@ export class SplitAsset extends BaseAsset {
 
 	public async apply({ asset, transaction, stateStore, reducerHandler }: ApplyAssetContext<{gameId: string, hand: number}>): Promise<void> {
 		const game: Game = await reducerHandler.invoke('poker:findGameById', {id: asset.gameId})
+		const account = await stateStore.account.get(transaction.senderAddress)
 		if (!game) {
 			throw new Error(
 				`Game not found`
@@ -64,6 +65,15 @@ export class SplitAsset extends BaseAsset {
 				`This hand can't be split`
 			)
 		}
+		const accountBalance = await reducerHandler.invoke('token:getBalance', {
+			address: transaction.senderAddress,
+		})
+		const minRemainingBalance = await reducerHandler.invoke('token:getMinRemainingBalance')
+		if (BigInt(accountBalance) - BigInt(minRemainingBalance) - BigInt(game.wager) < BigInt(0)) {
+			throw new Error(
+				`Balance to low`
+			)
+		}
 
 		const randomCards: ResultRng = await reducerHandler.invoke('rng:getNumber', {
 			min: 0,
@@ -88,10 +98,17 @@ export class SplitAsset extends BaseAsset {
 		game.playerHands[asset.hand].cards = [game.playerHands[asset.hand].cards[0], randomCards.numbers[1].number]
 		game.playerHands[asset.hand].count = getHandCount(game.playerHands[asset.hand].cards)
 
-		reducerHandler.invoke("token:debit", {
-			address: transaction.senderAddress,
-			amount: BigInt(game.wager)
-		})
+
+		try {
+			reducerHandler.invoke("token:debit", {
+				address: transaction.senderAddress,
+				amount: BigInt(game.wager)
+			})
+		} catch(e) {
+			throw new Error(
+				`Balance to low`
+			)
+		}
 
 		await updateGame(stateStore, game)
 	}

@@ -64,6 +64,16 @@ export class DoubleAsset extends BaseAsset {
 			)
 		}
 
+		const accountBalance = await reducerHandler.invoke('token:getBalance', {
+			address: transaction.senderAddress,
+		})
+		const minRemainingBalance = await reducerHandler.invoke('token:getMinRemainingBalance')
+		if (BigInt(accountBalance) - BigInt(minRemainingBalance) - BigInt(game.wager) < BigInt(0)) {
+			throw new Error(
+				`Balance to low`
+			)
+		}
+
 		const randomCard: ResultRng = await reducerHandler.invoke('rng:getNumber', {
 			min: 0,
 			max: 51,
@@ -78,10 +88,16 @@ export class DoubleAsset extends BaseAsset {
 		game.playerHands[asset.hand].double = true
 		game.playerHands[asset.hand].count = getHandCount(game.playerHands[asset.hand].cards)
 
-		reducerHandler.invoke("token:debit", {
-			address: transaction.senderAddress,
-			amount: BigInt(game.wager),
-		})
+		try {
+			reducerHandler.invoke("token:debit", {
+				address: transaction.senderAddress,
+				amount: BigInt(game.wager),
+			})
+		} catch (e) {
+			throw new Error(
+				`Balance to low`
+			)
+		}
 
 		if (isLastHand(game)) {
 			await endGame(stateStore, reducerHandler, game, transaction)
