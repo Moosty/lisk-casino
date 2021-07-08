@@ -52,6 +52,7 @@ export const Blackjack = ({account}) => {
           try {
             await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
             setGame(await client.invoke('poker:getGameById', {id: activeGameId}))
+            setActiveGameId(null)
           } catch (e) {
             setTimeout(async () => await findTransaction(), 1000)
           }
@@ -166,6 +167,7 @@ export const Blackjack = ({account}) => {
     const client = await getClient
     setLoadingCreate(true)
     try {
+      setActiveGameId(1)
       const result = await createTransaction({
         moduleId: 8890,
         assetId: 0,
@@ -238,7 +240,7 @@ export const Blackjack = ({account}) => {
                   ]}/>
               </div>
               <div className="flex flex-row space-x-2">
-                <Button className="w-full" secondary label="Deal!" onClick={startNewGame} disabled={game?.open === 1} />
+                <Button className="w-full" secondary label={activeGameId ? "In game.." : "Deal!"} onClick={startNewGame} disabled={game?.open === 1 || activeGameId} />
                 <Button className="w-full" onClick={() => {
                   setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
                   setBet(0)
