@@ -28,6 +28,7 @@ import {ClaimPriceAsset} from "./assets/claim_price_asset";
 import {ResultRng} from "../rng/rng_module";
 import {archiveTicket, findTicketById, getTicketRound, updateRound, updateTicket} from "./reducers/tickets";
 import {Round, Ticket} from "./types";
+import {getPlayerArchive, getRound, getTicketById} from "./actions/lottery";
 
 export class LotteryModule extends BaseModule {
   public accountSchema = {
@@ -61,11 +62,14 @@ export class LotteryModule extends BaseModule {
       tickets: [],
     }
   }
+
+  // @ts-ignore
   public actions = {
-    // Example below
-    // getBalance: async (params) => this._dataAccess.account.get(params.address).token.balance,
-    // getBlockByID: async (params) => this._dataAccess.blocks.get(params.id),
+    getTicketById: async ({id}) => await getTicketById(this._dataAccess, id),
+    getRound: async ({round}) => await getRound(this._dataAccess, round),
+    getPlayerArchive: async ({address}) => await getPlayerArchive(this._dataAccess, address),
   };
+
   public reducers = {
     // Example below
     // getBalance: async (
@@ -140,18 +144,20 @@ export class LotteryModule extends BaseModule {
       const threeCorrect = ((BigInt(roundData.safe) * BigInt(100)) / BigInt(3)) / BigInt(100)
       const twoCorrect = ((BigInt(roundData.safe) * BigInt(100)) / BigInt(10)) / BigInt(100)
       let charity = BigInt(roundData.safe)
-      roundData.results = roundData.results.map(res => {
-        const categoryPrice = res.correctNumbers === 4 ? fourCorrect : res.correctNumbers === 3 ? threeCorrect : res.correctNumbers === 2 ? twoCorrect : BigInt(0)
-        charity -= categoryPrice
-        return {
-        ...res,
-          price: ((categoryPrice * BigInt(100)) / BigInt(res.wins)) / BigInt(100)
-        }
-      })
-      await _input.reducerHandler.invoke('token:credit', {
-        address: Buffer.from("92668567a645cdac2cee05158a804bf0266229bb", 'hex'),
-        amount: charity
-      })
+      if (roundData.results.length > 0) {
+        roundData.results = roundData.results.map(res => {
+          const categoryPrice = res.correctNumbers === 4 ? fourCorrect : res.correctNumbers === 3 ? threeCorrect : res.correctNumbers === 2 ? twoCorrect : BigInt(0)
+          charity -= categoryPrice
+          return {
+            ...res,
+            price: ((categoryPrice * BigInt(100)) / BigInt(res.wins)) / BigInt(100)
+          }
+        })
+        await _input.reducerHandler.invoke('token:credit', {
+          address: Buffer.from("92668567a645cdac2cee05158a804bf0266229bb", 'hex'),
+          amount: charity
+        })
+      }
       await updateRound({stateStore: _input.stateStore, round: roundData})
     }
     // Get any data from stateStore using block info, below is an example getting a generator
