@@ -48,10 +48,10 @@ export const Lottery = ({
         <Button label="Claim" />
       </div>
 
-      <div className="w-app mx-auto mb-8">
-        <div className="flex flex-row space-x-4 mb-8">
+      <div className="w-app mx-auto mb-8 ">
+        <div className="flex flex-col md:flex-row space-y-4 md:space-x-4 mb-8">
           <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500
-          flex flex-col w-1/3 space-y-4  rounded-default py-4 px-8">
+          flex flex-col w-full md:w-1/3 space-y-4  rounded-default py-4 px-8">
 
             <div className="flex flex-row space-x-4 text-24px">
               <Typography type="span" type="span"
@@ -80,7 +80,7 @@ export const Lottery = ({
 
           {/*LAST DRAW*/}
           <div className="bg-gradient-to-r from-indigo-600  to-indigo-800
-          flex flex-col w-1/3 space-y-4  rounded-default py-4 px-8">
+          flex flex-col w-full md:w-1/3 space-y-4  rounded-default py-4 px-8">
 
             <div className="flex flex-row space-x-4 text-24px">
               <Typography type="span" type="span"
@@ -127,7 +127,7 @@ export const Lottery = ({
 
           </div>
             <div className="bg-gradient-to-r from-indigo-600  to-black
-            flex flex-col w-1/3 space-y-4   rounded-default py-4 px-8">
+            flex flex-col w-full md:w-1/3 space-y-4   rounded-default py-4 px-8">
             <div className="flex flex-col text-24px">
               <Typography type="span" type="span"
                           className="font-bold text-white mb-4">Your Tickets</Typography>
@@ -138,7 +138,7 @@ export const Lottery = ({
               </div>
             </div>
           </div>
-          <div className="w-1/4 mx-auto flex flex-col">
+          <div className="w-full md:w-1/4 mx-auto flex flex-col">
             <div className="flex w-full flex-row space-x-4">
               <div className="flex w-full flex-col  space-y-4 bg-gradient-to-r from-indigo-600  to-indigo-800 rounded-default
           p-4">
