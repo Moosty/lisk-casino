@@ -218,7 +218,7 @@ export const Blackjack = ({account}) => {
       </div>
       <div className="w-1/4 mx-auto flex flex-col">
         <div className="flex w-full flex-row space-x-4">
-          <div className="flex w-full flex-col  space-y-4 bg-gradient-to-r from-indigo-600  to-indigo-800 rounded-default
+          <div className="flex w-full flex-col  space-y-4 bg-gradient-to-r from-green-400  to-green-500 rounded-default
           p-4">
             <div className="flex flex-col space-y-2">
               <Typography type="span" className="font-medium text-white">Balance</Typography>
