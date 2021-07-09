@@ -15,7 +15,7 @@ export class BuyTicketAsset extends BaseAsset {
     	quantity: {
     		fieldNumber: 1,
 				dataType: "uint32",
-				min: 1
+				minimum: 1
 			}
 		},
   };
@@ -44,7 +44,8 @@ export class BuyTicketAsset extends BaseAsset {
 		const account: any = await stateStore.account.get(transaction.senderAddress)
 		for (let i = 1; i <= asset.quantity; i++) {
 			const nonce = BigInt(account.lottery.nonce) + BigInt(i)
-			const ticket: any = createEmptyTicket({address: transaction.senderAddress, nonce})
+			const round = Math.floor(stateStore.chain.lastBlockHeaders[0].height / 100)
+			const ticket: any = createEmptyTicket({address: transaction.senderAddress, nonce, round})
 			ticket.playerAddress = transaction.senderAddress;
 			ticket.nonce = nonce;
 			ticket.height = stateStore.chain.lastBlockHeaders[0].height;
