@@ -16,7 +16,7 @@ export const ProductCard = ({product, onClick, image, soon}) => {
     />
 
 
-    <div className={["absolute inset-0 bg-gray-600"
+    <div className={["absolute inset-0 bg-gray-600 hover:bg-gray-900 cursor-pointer"
     ].join(" ")} style={{mixBlendMode: 'multiply'}} aria-hidden="true"/>
 
   </div>
@@ -26,7 +26,7 @@ export const ProductCard = ({product, onClick, image, soon}) => {
     }
     <div className="flex flex-col md:flex-row justify-between space-y-6 py-24">
       <div className="flex flex-col  md:w-1/2 z-40">
-        <Typography className="text-themeButtonTextPrimary items-center text-center" type="h1" Element="h1">{product}</Typography>
+        <Typography className="text-themeButtonTextPrimary cursor-pointer items-center text-center" type="h1" Element="h1">{product}</Typography>
 
       </div>
 
