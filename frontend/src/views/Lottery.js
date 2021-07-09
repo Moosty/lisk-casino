@@ -227,7 +227,7 @@ export const Lottery = ({
             </div>
             <div className="flex flex-col space-y-2">
               <span className="font-medium text-white">Total Prize Pool:</span>
-              <span className="text-yellow-300 font-bold text-32px">{previousRound?.safe && transactions.convertBeddowsToLSK(previousRound.safe) || 0} LSK</span>
+              <span className="text-yellow-300 font-bold text-32px">{previousRound?.safe && parseFloat(transactions.convertBeddowsToLSK(previousRound.safe)).toFixed(2) || 0} LSK</span>
             </div>
             <div className="flex flex-col space-y-4">
               <div className="flex flex-row justify-between">
