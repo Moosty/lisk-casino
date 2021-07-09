@@ -22,6 +22,7 @@ export const Lottery = ({
   const history = useHistory();
   const [balance, setBalance] = useState(0)
   const [tickets, setTickets] = useState(null)
+  const [buyDisabled, setDisableBuy] = useState(false)
   const [activeTickets, setActiveTickets] = useState([])
   const [activePrizes, setActivePrizes] = useState([])
   const [height, setHeight] = useState(null)
@@ -37,6 +38,7 @@ export const Lottery = ({
   const buyTickets = async () => {
     const client = await getClient
     try {
+      setDisableBuy(true)
       const result = await createTransaction({
         moduleId: 8892,
         assetId: 0,
@@ -50,17 +52,25 @@ export const Lottery = ({
         const findTransaction = async () => {
           try {
             await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
+            setDisableBuy(false)
+            setTickets(0)
+            setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
           } catch (e) {
             setTimeout(async () => await findTransaction(), 1000)
           }
         }
         await findTransaction()
-
       } else {
         console.log(result)
+        setTickets(0)
+        setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+        setDisableBuy(false)
       }
     } catch (e) {
       console.log(e)
+      setTickets(0)
+      setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+      setDisableBuy(false)
     }
   }
 
@@ -92,8 +102,46 @@ export const Lottery = ({
     }
   }
 
+  const onClaim = async () => {
+    const client = await getClient
+    try {
+      setDisableBuy(true)
+      const result = await createTransaction({
+        moduleId: 8892,
+        assetId: 1,
+        assets: {
+          claim: true
+        },
+        account,
+        client,
+      })
+      if (result.status) {
+        const findTransaction = async () => {
+          try {
+            await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
+            setDisableBuy(false)
+            setTickets(0)
+            setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+          } catch (e) {
+            setTimeout(async () => await findTransaction(), 1000)
+          }
+        }
+        await findTransaction()
+      } else {
+        console.log(result)
+        setTickets(0)
+        setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+        setDisableBuy(false)
+      }
+    } catch (e) {
+      console.log(e)
+      setTickets(0)
+      setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
+      setDisableBuy(false)
+    }
+  }
+
   useEffect(() => {
-    console.log(account)
     if (account?.chain?.lottery?.tickets) {
       // get complete tickets by id save them
       getUserActiveTickets(account?.chain?.lottery?.tickets)
@@ -122,8 +170,8 @@ export const Lottery = ({
   }, [])
 
   useEffect(() => {
-    console.log(round, previousRound, height)
-  }, [round, previousRound, height])
+    console.log(round, previousRound, height,)
+  }, [tickets, round, previousRound, height])
 
   useEffect(() => {
     if (account?.chain?.token?.balance && balance === 0) {
@@ -136,12 +184,12 @@ export const Lottery = ({
         title="Welcome to the Lisk Lottery!"
         subTitle="Get your tickets now!"
         gradient/>
-      <div
+    {round && activePrizes?.length > 0 && <div
         className="w-app mx-auto flex flex-col md:flex-row bg-gradient-to-r from-green-400  to-green-500 rounded-default py-2 px-4 justify-between items-center">
-        <span className="font-medium text-white text-18px flex items-center ">AMAZING! You won <span
-          className="mx-4 text-yellow-300 font-medium text-32px">766.990 LSK</span>in the lottery! </span>
-        <Button label="Claim"/>
-      </div>
+        <span className="font-medium text-white text-18px flex items-center ">AMAZING! You won with <span
+          className="mx-4 text-yellow-300 font-medium text-32px">{activePrizes?.length} tickets</span> in the lottery! </span>
+        <Button onClick={onClaim} label="Claim"/>
+      </div>}
       <div className="w-app mx-auto mb-8 ">
         <div className="flex flex-col md:flex-row space-y-4 md:space-x-4 mb-8">
           <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500
@@ -209,8 +257,7 @@ export const Lottery = ({
             <div className="flex flex-col text-24px">
               <Typography type="span" className="font-bold text-white mb-4">Your Tickets</Typography>
               <div className="flex flex-col space-y-4">
-                {activeTickets && activeTickets.map(ticket => {
-                  console.log(ticket, activePrizes)
+                {activeTickets && round && activeTickets.filter(ticket => ticket.round === round.round).map(ticket => {
                   return <MyLotteryNumbers currentRound={round} round={previousRound} won={activePrizes} ticket={ticket}/>
                 })}
               </div>
@@ -244,7 +291,7 @@ export const Lottery = ({
                   </div>
                 </div>
                 <div className="flex flex-row space-x-2">
-                  <Button className="w-full" secondary label="Buy Tickets" onClick={buyTickets}/>
+                  <Button disabled={buyDisabled} className="w-full" secondary label="Buy Tickets" onClick={buyTickets}/>
                   <Button className="w-full" onClick={() => {
                     setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
                     setTickets(0)

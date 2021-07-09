@@ -277,12 +277,12 @@ export const addTicketToAccount = async (stateStore, ticketId, playerAddress, no
 
 export const archivePrice = async (stateStore, ticket: Ticket) => {
   const account = await stateStore.account.get(ticket.owner)
-  if (!account || !account.lottery.prices) {
+  if (!account || !account.lottery.prizes) {
     throw new Error(
       `Account not found`
     )
   }
-  account.lottery.prices = account.lottery.prices.filter(id => !id.equals(ticket.id))
+  account.lottery.prizes = account.lottery.prizes.filter(id => !id.equals(ticket.id))
   await stateStore.account.set(ticket.owner, account)
 }
 
