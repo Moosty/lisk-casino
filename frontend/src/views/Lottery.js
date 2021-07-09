@@ -195,16 +195,16 @@ export const Lottery = ({
           <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500
           flex flex-col w-full md:w-1/3 space-y-4  rounded-default py-4 px-8">
             <div className="flex flex-row space-x-4 text-24px">
-              <Typography type="span" className="font-bold text-white">Next draw in {counter}</Typography>
+              <Typography type="span" className="font-bold text-white">Next draw in {100 - (height - Math.floor(height / 100) * 100)} blocks</Typography>
             </div>
             <div className="flex flex-row space-x-4">
-              <Typography type="span" className="font-medium text-white">Next draw</Typography>
-              <Typography type="span" className="font-medium text-yellow-300">#{Math.floor(height / 100)} in <b>{100 - (height - Math.floor(height / 100) * 100)}</b> Blocks</Typography>
+              <Typography type="span" className="font-medium text-white">Current round</Typography>
+              <Typography type="span" className="font-medium text-yellow-300">#{Math.floor(height / 100)} </Typography>
             </div>
 
             <div className="flex flex-col space-y-2">
               <span className="font-medium text-white">Total Pricepool:</span>
-              <span className="text-yellow-300 font-bold text-32px">{round?.safe && transactions.convertBeddowsToLSK(round.safe) || 0} LSK</span>
+              <span className="text-yellow-300 font-bold text-32px">{round?.safe && parseFloat(transactions.convertBeddowsToLSK(round.safe)).toFixed(1) || 0} LSK</span>
             </div>
             <div className="flex flex-col">
               <LotteryPriceNumbers currentPricePot={round?.safe && transactions.convertBeddowsToLSK(round.safe) || 0} draw={0.5} totalNumbers={4}/>
@@ -245,9 +245,9 @@ export const Lottery = ({
                 </div>
                 <div className="flex flex-col space-y-4 text-right">
                   <span className="font-medium text-white ">Prize Pool</span>
-                  <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(2)) / BigInt(100)).toString()) || 0} LSK</span>
-                  <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(3)) / BigInt(100)).toString()) || 0} LSK</span>
-                  <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(10)) / BigInt(100)).toString()) || 0} LSK</span>
+                  <span className="font-medium text-white text-24px ">{previousRound?.safe && parseFloat(transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(2)) / BigInt(100)).toString())).toFixed(2) || 0} LSK</span>
+                  <span className="font-medium text-white text-24px ">{previousRound?.safe && parseFloat(transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(3)) / BigInt(100)).toString())).toFixed(2) || 0} LSK</span>
+                  <span className="font-medium text-white text-24px ">{previousRound?.safe && parseFloat(transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(10)) / BigInt(100)).toString())).toFixed(2) || 0} LSK</span>
                 </div>
               </div>
             </div>

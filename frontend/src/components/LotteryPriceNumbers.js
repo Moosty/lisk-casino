@@ -5,7 +5,7 @@ export const LotteryPriceNumbers = ({currentPricePot, draw, totalNumbers}) => {
 
     <div className="flex flex-row justify-between items-center">
       <span className="text-yellow-300 font-bold text-24px">{totalNumbers} numbers</span>
-      <span className="text-white font-medium">{(currentPricePot * draw).toFixed(8)} LSK</span>
+      <span className="text-white font-medium">{(currentPricePot * draw).toFixed(2)} LSK</span>
     </div>
   )
 }
