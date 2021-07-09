@@ -6,7 +6,7 @@ import {PartialApplicationConfig} from "lisk-sdk";
 const conf = config as PartialApplicationConfig;
 conf.rpc = {
   enable: true,
-    port: 3501,
+    port: 8889,
     mode: 'ws',
 }
 const app = getApplication(genesisBlock, conf);
