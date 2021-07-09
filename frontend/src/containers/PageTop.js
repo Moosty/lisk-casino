@@ -98,7 +98,7 @@ export const PageTop = ({updateFilters, filters, changeToggle}) => {
 
   return (<Container className="flex flex-row my-4 ">
     <BreadCrumbs crumbs={crumbs} className="flex-start w-full"/>
-    <Filters selectedItems={filters} updateFilters={updateFilters} hidden={filtersHidden} className="flex flex-row justify-end w-full" />
+    {/*<Filters selectedItems={filters} updateFilters={updateFilters} hidden={filtersHidden} className="flex flex-row justify-end w-full" />*/}
     {!toggleHidden && <Button label="Toggle View" onClick={changeToggle} />}
   </Container>)
 }
