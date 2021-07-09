@@ -15,6 +15,7 @@ export class CreateCommand extends TransactionCreateCommand {
 
 	static args = [...TransactionCreateCommand.args];
 
+	// @ts-ignore
 	public getApplication(
 		genesisBlock: Record<string, unknown>,
 		config: PartialApplicationConfig,
