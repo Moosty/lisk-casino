@@ -174,7 +174,7 @@ export const Lottery = ({
             <div className="flex flex-col space-y-4">
               <span className="font-medium text-white">Winning Numbers:</span>
               <div className="flex flex-row space-x-4">
-                <MyLotteryNumbers round={previousRound?.round} numbers={previousRound?.numbers}/>
+                <MyLotteryNumbers round={previousRound} numbers={previousRound?.numbers}/>
               </div>
             </div>
             <div className="flex flex-col space-y-2">
@@ -210,7 +210,7 @@ export const Lottery = ({
               <Typography type="span" className="font-bold text-white mb-4">Your Tickets</Typography>
               <div className="flex flex-col space-y-4">
                 {activeTickets && activeTickets.map(ticket => {
-                  console.log(ticket)
+                  console.log(ticket, activePrizes)
                   return <MyLotteryNumbers currentRound={round} round={previousRound} won={activePrizes} ticket={ticket}/>
                 })}
               </div>
