@@ -10,7 +10,7 @@
         "s3:GetObject"
       ],
       "Resource":[
-        "liskcrowd.moosty.com/*"
+        "casino-demo.moosty.com/*"
       ]
     }
   ]
