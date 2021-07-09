@@ -61,7 +61,7 @@ export const Lottery = ({
         subTitle="Get your tickets now!"
         gradient/>
       <div
-        className="w-app mx-auto flex flex-col md:flex-row bg-gradient-to-r from-green-600 to-green-800 rounded-default py-2 px-4 justify-between items-center">
+        className="w-app mx-auto flex flex-col md:flex-row bg-gradient-to-r from-green-400  to-green-500 rounded-default py-2 px-4 justify-between items-center">
         <span className="font-medium text-white text-18px flex items-center ">AMAZING! You won <span
           className="mx-4 text-yellow-300 font-medium text-32px">766.990 LSK</span>in the lottery! </span>
         <Button label="Claim"/>
