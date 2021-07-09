@@ -1,5 +1,10 @@
 export const footerItems = {
-  liskCasino: [{
+  liskCasino: [
+    {
+      label: "About Lisk Casino",
+      to: "/about"
+    },
+    {
     label: "Github",
     to: "https://github.com/Moosty/lisk-casino"
   }],

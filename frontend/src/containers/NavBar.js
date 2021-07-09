@@ -43,6 +43,12 @@ export const NavBarContainer = ({onLoginClick, onRegisterClick, onSignOut, user,
         path: '/top-list',
         current: '/top-list' === location.pathname,
       },
+      {
+        name: 'Charity',
+        href: () => history.push('/charity'),
+        path: '/charity',
+        current: '/charity' === location.pathname,
+      },
     ],
     ctaButton: <div />,
     userNavigation: [
