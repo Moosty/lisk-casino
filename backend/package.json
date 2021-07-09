@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"description": "Lisk-Casino proof of concept",
 	"author": "corbifex",
-	"license": "APACHE2.0",
+	"license": "MIT",
 	"keywords": [
 		"blockchain",
 		"lisk",
