@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {NavBar} from "@moosty/dao-storybook";
 import {useHistory, useLocation} from "react-router-dom";
-import {useProposals} from "../hooks/proposals";
 import {transactions} from "@liskhq/lisk-client"
 
 export const NavBarContainer = ({onLoginClick, onRegisterClick, onSignOut, user, setModal}) => {
   const history = useHistory();
   const location = useLocation();
-  const {setAccount} = useProposals();
   const [navBarArgs, setNavBarArgs] = useState({
     onLoginClick,
     onRegisterClick,
@@ -51,9 +49,6 @@ export const NavBarContainer = ({onLoginClick, onRegisterClick, onSignOut, user,
     invitations: [],
   })
 
-  useEffect(() => {
-    setAccount(user)
-  }, [user])
 
   useEffect(() => {
     const newNavArgs = {...navBarArgs}

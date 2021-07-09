@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Container, BreadCrumbs, Button} from "@moosty/dao-storybook";
-import {Filters} from "./Filters";
 import {useHistory, useLocation, useRouteMatch} from "react-router-dom";
 
 export const PageTop = ({updateFilters, filters, changeToggle}) => {

@@ -7,7 +7,7 @@ export const Hand = ({cards, double, bet, split, dealer, result, hand, onSplit, 
   return (
     <Container className="w-1/2 space-x-2 space-y-4 flex flex-col items-center align-center">
       {!dealer && <div className="font-medium text-24px text-yellow-300 text-center">
-        You {hand.state !== 'undecided' && hand.state.toUpperCase()}
+        You {hand.state !== 'undecided' && hand.state.toUpperCase()} {hand.count}
       </div>}
       <Container className=" space-x-2 flex flex-row justify-center">
         {cards?.map(card => <Card card={card}/>)}
