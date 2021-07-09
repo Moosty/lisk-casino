@@ -35,7 +35,7 @@ export const Routes = () => {
         onLoginClick={() => setCurrentOpen("login")}
         onRegisterClick={() => setCurrentOpen("register")}
       />
-      <div style={{backgroundColor:""}} className="w-full  min-h-screen  flex flex-col">
+      <div style={{backgroundColor:""}} className="w-full bg-gray-900  min-h-screen  flex flex-col">
         <div  className={"w-full mx-auto flex-grow "}>
           <Switch>
             <Route path={"/my-projects"}>

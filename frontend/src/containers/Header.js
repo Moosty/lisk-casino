@@ -35,7 +35,7 @@ export const Header = ({
       </div>
       <Container className={["w-app py-24 z-50"].join(" ")}>
         <div className="flex flex-col md:flex-row justify-between space-y-6">
-          <div className="flex flex-col  md:w-1/2 z-40">
+          <div className="flex flex-col  md:w-1/2 z-10">
             <Typography className="text-themeButtonTextPrimary" type="h1" Element="h1">{title}</Typography>
             <Typography type='h3' Element="span" className="text-themeButtonTextPrimary">"{subTitle}"</Typography>
             {buttonLabel1 &&

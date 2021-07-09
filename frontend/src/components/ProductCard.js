@@ -6,7 +6,7 @@ export const ProductCard = ({product, onClick, image, soon}) => {
 
 
 <div onClick={onClick}
-  className="relative w-full md:w-1/4 rounded-default mx-auto mt-16 rounded-default">
+  className="hover:cursor-pointer	 group-hover:text-opacity-80 relative w-full md:w-1/4 rounded-default mx-auto mt-16 rounded-default">
   <div className="absolute inset-0 rounded-default">
 
     <img
