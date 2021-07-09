@@ -1,7 +1,7 @@
 import React from 'react';
 import { apiClient, codec } from "@liskhq/lisk-client"
 
-const server = 'ws://localhost:8889/ws'
+const server = 'wss://casino-demo-ws.moosty.com/ws'
 
 let client;
 const getClient = async () => {
