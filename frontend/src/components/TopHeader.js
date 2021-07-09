@@ -19,8 +19,6 @@ export const TopHeader = ({jackpotFundNumber = 450.877}) => {
                   className="cursor-pointer underline block sm:ml-2 sm:inline-block text-yellow-600 font-bold">
 
             </span>
-            <IconButton className="h-5 w-5 text-black" >
-              <InformationCircleIcon /></IconButton>
           </p>
         </div>
 
