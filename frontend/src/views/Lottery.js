@@ -129,7 +129,7 @@ export const Lottery = ({
               </div>
             </div>
           </div>
-          <div className="bg-gradient-to-r from-indigo-600  to-black
+          <div className="bg-gradient-to-r from-indigo-600  to-indigo-800
             flex flex-col w-full md:w-1/3 space-y-4   rounded-default py-4 px-8">
             <div className="flex flex-col text-24px">
               <Typography type="span" type="span" className="font-bold text-white mb-4">Your Tickets</Typography>

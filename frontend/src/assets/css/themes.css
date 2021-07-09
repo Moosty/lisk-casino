@@ -86,9 +86,9 @@
     --border-radius-default: 8px;
 
     /* SHADOWS */
-    --shadow-defaultPrimary: 0 3px 14px rgba(236, 30, 203, 0);
-    --shadow-defaultSecondary: -4px 2px 36px -10px rgba(43, 214, 123, 0);
-    --shadow-defaultTertiary: -4px 2px 36px -10px rgba(250, 55, 74, 0);
+    --shadow-defaultPrimary: 0 3px 14px rgba(236, 30, 203, 0.5);
+    --shadow-defaultSecondary: -4px 2px 36px -10px rgba(43, 214, 123, 0.5);
+    --shadow-defaultTertiary: -4px 2px 36px -10px rgba(250, 55, 74, 0.5);
 
     /*Typography */
     --font-familyPrimary: 'Montserrat', sans-serif;

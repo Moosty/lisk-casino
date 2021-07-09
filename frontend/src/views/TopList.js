@@ -3,7 +3,7 @@ import {TableTopList} from "../components/TableTopList";
 
 export const TopList = ({}) => {
 
-  return (<div>
+  return (<div className="w-app mx-auto p-8">
       <TableTopList/>
     </div>
   )
