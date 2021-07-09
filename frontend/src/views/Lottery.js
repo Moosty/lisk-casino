@@ -137,7 +137,7 @@ export const Lottery = ({
         subTitle="Get your tickets now!"
         gradient/>
       <div
-        className="w-app mx-auto flex flex-row bg-gradient-to-r from-green-600 to-green-800 rounded-default py-2 px-4 justify-between items-center">
+        className="w-app mx-auto flex flex-col md:flex-row bg-gradient-to-r from-green-600 to-green-800 rounded-default py-2 px-4 justify-between items-center">
         <span className="font-medium text-white text-18px flex items-center ">AMAZING! You won <span
           className="mx-4 text-yellow-300 font-medium text-32px">766.990 LSK</span>in the lottery! </span>
         <Button label="Claim"/>
@@ -178,8 +178,8 @@ export const Lottery = ({
               </div>
             </div>
             <div className="flex flex-col space-y-2">
-              <span className="font-medium text-white">Total Pricepool:</span>
-              <span className="text-yellow-300 font-bold text-32px">{previousRound?.safe && transactions.convertBeddowsToLSK(previousRound.safe)} LSK</span>
+              <span className="font-medium text-white">Total Prize Pool:</span>
+              <span className="text-yellow-300 font-bold text-32px">{previousRound?.safe && transactions.convertBeddowsToLSK(previousRound.safe) || 0} LSK</span>
             </div>
             <div className="flex flex-col space-y-4">
               <div className="flex flex-row justify-between">
@@ -197,14 +197,14 @@ export const Lottery = ({
                 </div>
                 <div className="flex flex-col space-y-4 text-right">
                   <span className="font-medium text-white ">Prize Pool</span>
-                  <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(2)) / BigInt(100)).toString())} LSK</span>
-                  <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(3)) / BigInt(100)).toString())} LSK</span>
-                  <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(10)) / BigInt(100)).toString())} LSK</span>
+                  <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(2)) / BigInt(100)).toString()) || 0} LSK</span>
+                  <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(3)) / BigInt(100)).toString()) || 0} LSK</span>
+                  <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(10)) / BigInt(100)).toString()) || 0} LSK</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="bg-gradient-to-r from-indigo-600  to-black
+          <div className="bg-gradient-to-r from-indigo-600  to-indigo-800
             flex flex-col w-full md:w-1/3 space-y-4   rounded-default py-4 px-8">
             <div className="flex flex-col text-24px">
               <Typography type="span" className="font-bold text-white mb-4">Your Tickets</Typography>
