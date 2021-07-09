@@ -15,6 +15,7 @@ import {Header} from "../containers/Header";
 import {LotteryPriceNumbers} from "../components/LotteryPriceNumbers";
 import {MyLotteryNumbers} from "../components/MyLotteryNumbers";
 import {transactions} from "@liskhq/lisk-client";
+import {ProductCard} from "../components/ProductCard";
 
 export const Home = ({account, setModal, filters, visible, userName, hands}) => {
   const history = useHistory()
@@ -31,39 +32,17 @@ export const Home = ({account, setModal, filters, visible, userName, hands}) => 
            gradient/>
 
 
-      <div className="w-app mt-8 mx-auto mb-8">
-        <div className="flex flex-row space-x-4 mb-8 ">
-          <div onClick={()=> history.push('/roulette')}  className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500
-                      cursor-pointer text-white hover:text-yellow-300
-          flex flex-col w-1/3 space-y-4  rounded-default py-12  px-8">
-            <div className="flex flex-row space-x-4 text-24px mx-auto">
-              <Typography type="span" type="span"
-                          className="font-bold">Roulette</Typography>
-            </div>
-          </div>
-          <div onClick={()=> history.push('/dices')}  className="bg-gradient-to-r from-indigo-600  to-black
-            cursor-pointer text-white hover:text-yellow-300
-            flex flex-col w-1/3 space-y-4   rounded-default py-12  px-8">
-            <div className="flex flex-col text-24px mx-auto">
-              <Typography type="span" type="span"
-                          className="font-bold  mb-4">Dices</Typography>
-            </div>
-          </div>
-          <div onClick={()=> history.push('/blackjack')}  className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500
-          cursor-pointer text-white hover:text-yellow-300
-          flex flex-col w-1/3 space-y-4  rounded-default py-12  px-8">
-            <div className="flex flex-row space-x-4 text-24px  mx-auto">
-              <Typography type="span" type="span"
-                          className="font-bold ">Blackjack</Typography>
-            </div>
-          </div>
-          <div onClick={()=> history.push('/lottery')} className="cursor-pointer  text-white hover:text-yellow-300 bg-gradient-to-r from-indigo-600  to-black
-            flex flex-col w-1/3 space-y-4   rounded-default py-12 px-8 ">
-            <div className="flex flex-col text-24px  mx-auto">
-              <Typography type="span" type="span"
-                          className="font-bold mb-4  ">Lottery</Typography>
-            </div>
-          </div>
+      <div className="w-app  mx-auto mb-8">
+        <div className="flex flex-col md:flex-row md:space-x-4 mb-8 ">
+<ProductCard product="Roulette" soon image={"/images/roulette.jpeg"} onClick={()=> history.push('/roulette')} />
+<ProductCard product="BlackJack" image={"/images/blackjack.jpeg"} onClick={()=> history.push('/blackjack')} />
+<ProductCard product="Dices" soon image={"/images/dices.jpeg"} onClick={()=> history.push('/dices')} />
+<ProductCard product="Lottery" image={"/images/lottery.jpeg"} onClick={()=> history.push('/lottery')} />
+          {/*END*/}
+
+
+
+
 
         </div>
 
@@ -71,6 +50,7 @@ export const Home = ({account, setModal, filters, visible, userName, hands}) => 
     <Container
       className={["flex flex-col lg:flex-row justify-between my-16 space-x-20  md:w-app "].join(" ")}>
       <div className="flex flex-col w-1/2  mb-4">
+
         <Typography type="h1" Element="h1">Lisk Casino</Typography>
         <Typography type="body" Element="span">Here you can play the games you like, instant betting and earning. Here you can play the games you like, instant betting and earning. A tamper free place to play all the games you can play at the physical casino, but without revealing your identity. Fully online. For your fun. A place for fun & luck.
         </Typography>
