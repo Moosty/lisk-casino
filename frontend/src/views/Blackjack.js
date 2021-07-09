@@ -59,9 +59,13 @@ export const Blackjack = ({account}) => {
         await findTransaction()
       } else {
         setLoadingCreate(false)
+        setActiveGameId(null)
+
         console.log(result)
       }
     } catch (e) {
+      setActiveGameId(null)
+
       console.log(e)
     }
   }
