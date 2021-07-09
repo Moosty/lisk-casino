@@ -1,8 +1,9 @@
 import React from 'react'
-import { XIcon } from '@heroicons/react/outline'
+import {InformationCircleIcon} from '@heroicons/react/outline'
 import {useHistory} from "react-router-dom";
+import {IconButton} from "@moosty/dao-storybook";
 
-export const TopHeader = () => {
+export const TopHeader = ({jackpotFundNumber = 450.877}) => {
   const history = useHistory()
 
   return (
@@ -12,16 +13,21 @@ export const TopHeader = () => {
           <p className="font-medium text-gray-900">
             <span className="">AWESOME! Current jackpot is...</span>
             <span className="block sm:ml-2 sm:inline-block text-yellow-300 font-bold">
-               450.877 LSK
+               {jackpotFundNumber} LSK
+            </span>
+            <span onClick={() => history.push('/lottery')}
+                  className="cursor-pointer underline block sm:ml-2 sm:inline-block text-yellow-600 font-bold">
 
             </span>
-            <span onClick={()=> history.push('/lottery')} className="cursor-pointer underline block sm:ml-2 sm:inline-block text-yellow-600 font-bold">
-               WIN
-            </span>
+            <IconButton className="h-5 w-5 text-black" >
+              <InformationCircleIcon /></IconButton>
           </p>
         </div>
+
 
       </div>
     </div>
   )
 }
+
+
