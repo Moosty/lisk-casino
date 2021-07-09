@@ -38,12 +38,6 @@ export const NavBarContainer = ({onLoginClick, onRegisterClick, onSignOut, user,
         current: '/lottery' === location.pathname,
       },
       {
-        name: 'Top List',
-        href: () => history.push('/top-list'),
-        path: '/top-list',
-        current: '/top-list' === location.pathname,
-      },
-      {
         name: 'Charity',
         href: () => history.push('/charity'),
         path: '/charity',
