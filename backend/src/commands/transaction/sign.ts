@@ -13,6 +13,7 @@ export class SignCommand extends TransactionSignCommand {
 
 	static args = [...TransactionSignCommand.args];
 
+	// @ts-ignore
 	public getApplication(
 		genesisBlock: Record<string, unknown>,
 		config: PartialApplicationConfig,
