@@ -9,6 +9,8 @@ export const Roulette = ({}) => {
       <Header title="Welcome to the Lisk Roulette!"
               subTitle="coming soon to a place near you"
               buttonLabel1="Start blackjack now!"
+              backgroundImage="/images/roulette.jpeg"
+
               onClickButton1={() => history.push('/blackjack')}
               gradient/>
 

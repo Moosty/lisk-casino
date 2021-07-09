@@ -7,6 +7,7 @@ import {Buffer, transactions} from '@liskhq/lisk-client'
 import {getGameId} from "../utils/common";
 import {createTransaction} from "../utils/transactions";
 import {AppContext} from "../appContext";
+import {Header} from "../containers/Header";
 
 export const Blackjack = ({account}) => {
   const {getClient} = useContext(AppContext);
@@ -198,8 +199,14 @@ export const Blackjack = ({account}) => {
     setBalance(balance - value)
   }
 
-  return <div className={"h-full w-app mx-auto"}>
-    <Container className={"w-full flex flex-row space-x-4 mt-8 "}>
+  return <div className={"h-full "}>
+    <Header
+      title="Welcome to the Lisk Blackjack!"
+      subTitle="Start your game now!"
+      backgroundImage="/images/blackjack.jpeg"
+
+      gradient/>
+    <div className={"w-full w-app mx-auto flex flex-row space-x-4 mt-8 "}>
       <div style={{backgroundColor: "#114602"}} className="w-3/4 mx-auto rounded-default mb-8  p-8 space-y-8 ">
         {game && <Dealer cards={game.houseCards} result={5}/>}
         {game && <Player
@@ -245,6 +252,6 @@ export const Blackjack = ({account}) => {
         </div>
       </div>
 
-    </Container>
+    </div>
   </div>
 }

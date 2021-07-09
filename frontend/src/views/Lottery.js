@@ -158,6 +158,8 @@ export const Lottery = ({account,}) => {
       <Header
         title="Welcome to the Lisk Lottery!"
         subTitle="Get your tickets now!"
+        backgroundImage="/images/lottery.jpeg"
+
         gradient/>
       {round && activePrizes?.length > 0 && <div
         className="w-app mx-auto flex flex-col md:flex-row bg-gradient-to-r from-green-400  to-green-500 rounded-default py-2 px-4 justify-between items-center">

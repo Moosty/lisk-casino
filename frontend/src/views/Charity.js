@@ -25,6 +25,8 @@ export const Charity = () => {
       <Header
         title="The Charity fund!"
         subTitle="supporting worldwide initiatives, decided by our users"
+        backgroundImage="/images/casinoabstract.jpeg"
+
         gradient/>
       <div
         className="w-app mt-4 mx-auto flex flex-col md:flex-row bg-gradient-to-r from-green-400  to-green-500 rounded-default py-2 px-4 justify-between items-center">

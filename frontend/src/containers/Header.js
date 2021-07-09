@@ -24,7 +24,7 @@ export const Header = ({
 
         <img
           className="w-full h-full object-cover"
-          src={"/images/casinoabstract.jpeg"}
+          src={backgroundImage}
           alt=""
         />
 

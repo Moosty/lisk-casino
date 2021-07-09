@@ -12,6 +12,8 @@ export const Home = () => {
         title="Welcome to the Lisk Casino!"
         subTitle="Where all your dreams become reality"
         buttonLabel1="Play Blackjack!"
+        backgroundImage="/images/casinobg2.jpeg"
+
         onClickButton1={() => history.push('/blackjack')}
         gradient/>
       <div className="w-app mx-auto mb-8">
