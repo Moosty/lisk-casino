@@ -148,7 +148,7 @@ export class LotteryModule extends BaseModule {
       roundData.state = "resolved"
       await updateRound({stateStore: _input.stateStore, round: roundData})
       const nextRound: Round = await getTicketRound(_input.stateStore, roundData.round + 1)
-      nextRound.safe = charity - ((charity * BigInt(100)) / BigInt(10)) / BigInt(100)
+      nextRound.safe = charity
       await updateRound({stateStore: _input.stateStore, round: nextRound})
 
     }

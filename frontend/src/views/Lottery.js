@@ -279,10 +279,10 @@ export const Lottery = ({
                     <ButtonGroup
                       className="mx-auto my-4 "
                       buttons={[
-                        {label: "1", onClick: () => updateTickets(1)},
-                        {label: "5", onClick: () => updateTickets(5)},
-                        {label: "10", onClick: () => updateTickets(10)},
-                        {label: "25", onClick: () => updateTickets(25)},
+                        {label: "1", onClick: () => updateTickets(1), disabled: parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString()).toString()) < tickets * 5},
+                        {label: "5", onClick: () => updateTickets(5), disabled: parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString()).toString()) < tickets * 5},
+                        {label: "10", onClick: () => updateTickets(10), disabled: parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString()).toString()) < tickets * 5},
+                        {label: "25", onClick: () => updateTickets(25), disabled: parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString()).toString()) < tickets * 5},
                       ]}/>
                   </div>
                   <div className="flex flex-col space-y-2">
