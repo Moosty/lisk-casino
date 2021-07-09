@@ -5,8 +5,10 @@ import {useHistory} from "react-router-dom";
 import {Button, ButtonGroup, SimpleInput, Typography} from "@moosty/dao-storybook";
 import {LotteryPriceNumbers} from "../components/LotteryPriceNumbers";
 import {MyLotteryNumbers} from "../components/MyLotteryNumbers";
-import {transactions} from "@liskhq/lisk-client";
+import {Buffer, transactions} from "@liskhq/lisk-client";
 import {AppContext} from "../appContext";
+import {createTransaction} from "../utils/transactions";
+import {getGameId} from "../utils/common";
 
 export const Lottery = ({
                           nextDrawNumber = 1,
@@ -15,11 +17,13 @@ export const Lottery = ({
                           previousPricePot = 860,
                           ticketNumber = 500,
                           counter = "7 hrs",
-                          account = 30,
+                          account,
                         }) => {
   const history = useHistory();
   const [balance, setBalance] = useState(0)
-  const [tickets, setTickets] = useState(0)
+  const [tickets, setTickets] = useState(null)
+  const [activeTickets, setActiveTickets] = useState([])
+  const [activePrizes, setActivePrizes] = useState([])
   const [height, setHeight] = useState(null)
   const [round, setRound] = useState(null)
   const [previousRound, setPreviousRound] = useState(null)
@@ -29,6 +33,78 @@ export const Lottery = ({
     setTickets(tickets + value)
     setBalance(balance - value * 5)
   }
+
+  const buyTickets = async () => {
+    const client = await getClient
+    try {
+      const result = await createTransaction({
+        moduleId: 8892,
+        assetId: 0,
+        assets: {
+          quantity: tickets
+        },
+        account,
+        client,
+      })
+      if (result.status) {
+        const findTransaction = async () => {
+          try {
+            await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
+          } catch (e) {
+            setTimeout(async () => await findTransaction(), 1000)
+          }
+        }
+        await findTransaction()
+
+      } else {
+        console.log(result)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const getUserActiveTickets = async (tickets) => {
+    const client = await getClient;
+    const detailedTickets = []
+    for (let i = 0; i < tickets.length; i++) {
+      detailedTickets.push(await client.invoke('lottery:getTicketById', {id: tickets[i].toString('hex')}))
+    }
+    if (detailedTickets.length > 0) {
+      console.log(tickets)
+      setActiveTickets(detailedTickets)
+    } else {
+      setActiveTickets([])
+    }
+  }
+
+  const getUserPriceTickets = async (tickets) => {
+    const client = await getClient;
+    const priceTickets = []
+    for (let i = 0; i < tickets.length; i++) {
+      priceTickets.push(await client.invoke('lottery:getTicketById', {id: tickets[i].toString('hex')}))
+    }
+    if (priceTickets.length > 0) {
+      console.log(priceTickets)
+      setActivePrizes(priceTickets)
+    } else {
+      setActivePrizes([])
+    }
+  }
+
+  useEffect(() => {
+    console.log(account)
+    if (account?.chain?.lottery?.tickets) {
+      // get complete tickets by id save them
+      getUserActiveTickets(account?.chain?.lottery?.tickets)
+    }
+    if (account?.chain?.lottery?.prizes) {
+      // get complete tickets by id save them
+      getUserPriceTickets(account?.chain?.lottery?.prizes)
+    }
+  }, [account])
+
+  useEffect(() => console.log(activeTickets), [activeTickets])
 
   useEffect(() => {
     const getLotteryData = async () => {
@@ -71,7 +147,7 @@ export const Lottery = ({
           <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500
           flex flex-col w-full md:w-1/3 space-y-4  rounded-default py-4 px-8">
             <div className="flex flex-row space-x-4 text-24px">
-              <Typography type="span" type="span" className="font-bold text-white">Next draw in {counter}</Typography>
+              <Typography type="span" className="font-bold text-white">Next draw in {counter}</Typography>
             </div>
             <div className="flex flex-row space-x-4">
               <Typography type="span" className="font-medium text-white">Next draw</Typography>
@@ -98,7 +174,7 @@ export const Lottery = ({
             <div className="flex flex-col space-y-4">
               <span className="font-medium text-white">Winning Numbers:</span>
               <div className="flex flex-row space-x-4">
-                <MyLotteryNumbers numbers={previousRound?.numbers}/>
+                <MyLotteryNumbers round={previousRound?.round} numbers={previousRound?.numbers}/>
               </div>
             </div>
             <div className="flex flex-col space-y-2">
@@ -125,18 +201,18 @@ export const Lottery = ({
                   <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(3)) / BigInt(100)).toString())} LSK</span>
                   <span className="font-medium text-white text-24px ">{previousRound?.safe && transactions.convertBeddowsToLSK((((BigInt(previousRound.safe) * BigInt(100)) / BigInt(10)) / BigInt(100)).toString())} LSK</span>
                 </div>
-
               </div>
             </div>
           </div>
           <div className="bg-gradient-to-r from-indigo-600  to-black
             flex flex-col w-full md:w-1/3 space-y-4   rounded-default py-4 px-8">
             <div className="flex flex-col text-24px">
-              <Typography type="span" type="span" className="font-bold text-white mb-4">Your Tickets</Typography>
+              <Typography type="span" className="font-bold text-white mb-4">Your Tickets</Typography>
               <div className="flex flex-col space-y-4">
-                <MyLotteryNumbers numbers={[12, 45, 34, 99]}/>
-                <MyLotteryNumbers numbers={[4, 5, 2, 90]}/>
-                <MyLotteryNumbers numbers={[5, 23, 5, 76]}/>
+                {activeTickets && activeTickets.map(ticket => {
+                  console.log(ticket)
+                  return <MyLotteryNumbers currentRound={round} round={previousRound} won={activePrizes} ticket={ticket}/>
+                })}
               </div>
             </div>
           </div>
@@ -168,7 +244,7 @@ export const Lottery = ({
                   </div>
                 </div>
                 <div className="flex flex-row space-x-2">
-                  <Button className="w-full" secondary label="Buy Tickets"/>
+                  <Button className="w-full" secondary label="Buy Tickets" onClick={buyTickets}/>
                   <Button className="w-full" onClick={() => {
                     setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
                     setTickets(0)

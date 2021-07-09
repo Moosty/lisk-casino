@@ -134,6 +134,7 @@ export class LotteryModule extends BaseModule {
           winner.lottery.prizes.push(ticket.id)
           await _input.stateStore.account.set(ticket.owner, winner)
         } else {
+          console.log(123123123123123, ticket.id.toString('hex'))
           await archiveTicket(_input.stateStore, ticket.id, ticket.owner)
         }
         await updateTicket(_input.stateStore, ticket)
@@ -155,11 +156,15 @@ export class LotteryModule extends BaseModule {
         })
         await _input.reducerHandler.invoke('token:credit', {
           address: Buffer.from("92668567a645cdac2cee05158a804bf0266229bb", 'hex'),
-          amount: charity
+          amount: ((charity * BigInt(100)) / BigInt(10)) / BigInt(100)
         })
       }
       roundData.state = "resolved"
       await updateRound({stateStore: _input.stateStore, round: roundData})
+      const nextRound: Round = await getTicketRound(_input.stateStore, roundData.round + 1)
+      nextRound.safe = charity - ((charity * BigInt(100)) / BigInt(10)) / BigInt(100)
+      await updateRound({stateStore: _input.stateStore, round: nextRound})
+
     }
     // Get any data from stateStore using block info, below is an example getting a generator
     // const generatorAddress = getAddressFromPublicKey(_input.block.header.generatorPublicKey);

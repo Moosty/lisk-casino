@@ -46,7 +46,7 @@ export const LotteryRoundsStateStoreSchema = {
       fieldNumber: 4,
       type: "array",
       items: {
-        dataType: "uint32",
+        dataType: "bytes",
       }
     },
     results: {
@@ -119,17 +119,19 @@ export const TicketsStateStoreSchema = {
   }
 }
 
-export const getTicketId = (address, nonce) => {
+export const getTicketId = ({address, nonce, round}) => {
   const nonceBuffer = Buffer.from(nonce.toString());
+  const roundBuffer = Buffer.from(round.toString());
   const seed = Buffer.concat([
     address,
     nonceBuffer,
+    roundBuffer,
   ]);
   return cryptography.hash(seed);
 }
 
-export const createEmptyTicket = ({address, nonce}) => ({
-  id: getTicketId(address, nonce),
+export const createEmptyTicket = ({address, nonce, round}) => ({
+  id: getTicketId({address, nonce, round}),
 })
 
 export const findTicketById = async (stateStore, id) => {
@@ -161,10 +163,11 @@ export const getEmptyRound = (round: number): Round => {
 }
 
 export const addRound = async ({stateStore, round, ticket}) => {
-  const roundStore = await stateStore.chain.get(`${CHAIN_STATE_LOTTERY_TICKETS}:${round}`)
+  const roundStore = await stateStore.chain.get(`${CHAIN_STATE_LOTTERY_ROUNDS}:${round}`)
   if (roundStore) {
     return true;
   }
+  console.log(roundStore, round, ticket)
   const newRound = {
     round,
     numbers: [],
@@ -173,19 +176,23 @@ export const addRound = async ({stateStore, round, ticket}) => {
     results: {},
     safe: ticket ? BigInt(500000000) : BigInt(0),
   }
+  console.log(newRound)
+
   await stateStore.chain.set(`${CHAIN_STATE_LOTTERY_ROUNDS}:${round}`,
     codec.encode(LotteryRoundsStateStoreSchema, newRound))
   return true;
 }
 
 export const addTicketToRound = async ({stateStore, round, ticket}) => {
-  const roundStore = await stateStore.chain.get(`${CHAIN_STATE_LOTTERY_TICKETS}:${round}`)
-  if (!roundStore) {
+  const roundStoreBuffer = await stateStore.chain.get(`${CHAIN_STATE_LOTTERY_ROUNDS}:${round}`)
+  if (!roundStoreBuffer) {
     await addRound({stateStore, round, ticket})
     return true;
   }
+  const roundStore: Round = codec.decode(LotteryRoundsStateStoreSchema, roundStoreBuffer)
   roundStore.tickets.push(ticket)
-  roundStore.safe = roundStore.safe + BigInt(500000000)
+  roundStore.safe = BigInt(roundStore.safe) + BigInt(500000000)
+  console.log(roundStore)
   await stateStore.chain.set(`${CHAIN_STATE_LOTTERY_ROUNDS}:${round}`,
     codec.encode(LotteryRoundsStateStoreSchema, roundStore))
   return true;
@@ -231,7 +238,7 @@ export const addTicket = async (stateStore, {reducerHandler, ticket}) => {
     }
   }
   const newTicket = {
-    round: Math.floor(ticket.height / 1000),
+    round: Math.floor(ticket.height / 100),
     owner: ticket.playerAddress,
     nonce: ticket.nonce,
     id: ticket.id,
@@ -241,9 +248,10 @@ export const addTicket = async (stateStore, {reducerHandler, ticket}) => {
     state: "open",
     correct: 0,
   }
-  await addTicketToAccount(stateStore, ticket.id, ticket.playerAddress)
+  await addTicketToAccount(stateStore, ticket.id, ticket.playerAddress, ticket.nonce)
   await stateStore.chain.set(`${CHAIN_STATE_LOTTERY_TICKETS}:${ticket.id.toString('hex')}`,
     codec.encode(TicketsStateStoreSchema, newTicket))
+  console.log("asdkfhjaslkdjflkasjdfe")
   await addTicketToRound({stateStore, ticket: ticket.id, round: newTicket.round})
 }
 
@@ -255,7 +263,7 @@ export const getTicketArchive = async (stateStore, playerAddress) => {
   ) : null
 }
 
-export const addTicketToAccount = async (stateStore, ticketId, playerAddress) => {
+export const addTicketToAccount = async (stateStore, ticketId, playerAddress, nonce) => {
   const account = await stateStore.account.get(playerAddress)
   if (!account || !account.lottery.tickets) {
     throw new Error(
@@ -263,6 +271,7 @@ export const addTicketToAccount = async (stateStore, ticketId, playerAddress) =>
     )
   }
   account.lottery.tickets.push(ticketId)
+  account.lottery.nonce = nonce;
   await stateStore.account.set(playerAddress, account)
 }
 

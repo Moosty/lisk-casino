@@ -11,6 +11,10 @@ export const getTicketById = async (dataAccess, id) => {
 
 export const getRound = async (dataAccess, round) => {
   const buffer = await dataAccess.getChainState(`${CHAIN_STATE_LOTTERY_ROUNDS}:${round}`)
+  console.log(buffer, codec.decode(
+    LotteryRoundsStateStoreSchema,
+    buffer,
+  ))
   return buffer ? codec.toJSON(LotteryRoundsStateStoreSchema, codec.decode(
     LotteryRoundsStateStoreSchema,
     buffer,

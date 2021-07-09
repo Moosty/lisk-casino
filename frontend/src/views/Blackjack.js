@@ -3,7 +3,6 @@ import React, {useContext, useEffect, useState} from "react";
 import {Button, ButtonGroup, Container, SimpleInput, Typography} from "@moosty/dao-storybook";
 import {Dealer} from "../components/Dealer";
 import {Player} from "../components/Player";
-import {TableTransactions} from "../components/TableTransactions";
 import {Buffer, transactions} from '@liskhq/lisk-client'
 import {getGameId} from "../utils/common";
 import {createTransaction} from "../utils/transactions";
