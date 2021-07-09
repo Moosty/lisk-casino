@@ -17,7 +17,7 @@ export const Charity = ({charityFundAmount = 500}) => {
       const client = await getClient;
       const charityAccountBuffer = await client.invoke('app:getAccount', { address: Buffer.from("92668567a645cdac2cee05158a804bf0266229bb", 'hex')})
       const charityAccount = await client.account.decode(charityAccountBuffer)
-      setCharityBalance(transactions.convertBeddowsToLSK(charityAccount.token.balance.toString()))
+      setCharityBalance(parseFloat(transactions.convertBeddowsToLSK(charityAccount.token.balance.toString())).toFixed(2))
     }
     getCharity()
   }, [height])
