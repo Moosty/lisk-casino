@@ -1,34 +1,26 @@
 /* global BigInt */
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useBlocks} from "../hooks/blocks";
-import {useHistory} from "react-router-dom";
-import {useProjects} from "../hooks/projects";
 import {AppContext} from "../appContext";
-import {ButtonGroup, Container, SimpleInput} from "@moosty/dao-storybook";
+import {Container} from "@moosty/dao-storybook";
 import {Typography} from "@moosty/dao-storybook";
 import {Button} from "@moosty/dao-storybook";
-import {RocketSvg} from "@moosty/dao-storybook";
-import {BlogSection} from "@moosty/dao-storybook";
-import {blogs} from "../fixtures/blogs";
-import {HeroContainer} from "../containers/Hero";
 import {Header} from "../containers/Header";
-import {LotteryPriceNumbers} from "../components/LotteryPriceNumbers";
-import {MyLotteryNumbers} from "../components/MyLotteryNumbers";
-import {transactions} from "@liskhq/lisk-client";
-import {ProductCard} from "../components/ProductCard";
+import {transactions} from '@liskhq/lisk-client'
 
-export const Charity = ({account, setModal, filters, visible, userName, hands, charityFundAmount = 500}) => {
-  const history = useHistory()
+export const Charity = ({charityFundAmount = 500}) => {
   const {getClient} = useContext(AppContext);
-  const {projects} = useProjects();
   const {height,} = useBlocks();
-
+  const [charityBalance, setCharityBalance] = useState(0)
   useEffect(() => {
     const getCharity = async () => {
       const client = await getClient;
-      const charityAccount = await client.invoke('app:getAccount', {})
+      const charityAccountBuffer = await client.invoke('app:getAccount', { address: Buffer.from("92668567a645cdac2cee05158a804bf0266229bb", 'hex')})
+      const charityAccount = await client.account.decode(charityAccountBuffer)
+      setCharityBalance(transactions.convertBeddowsToLSK(charityAccount.token.balance.toString()))
     }
-  }, [account])
+    getCharity()
+  }, [height])
 
   return (
     <>
@@ -38,7 +30,7 @@ export const Charity = ({account, setModal, filters, visible, userName, hands, c
       <div
         className="w-app mt-4 mx-auto flex flex-col md:flex-row bg-gradient-to-r from-green-400  to-green-500 rounded-default py-2 px-4 justify-between items-center">
         <span className="font-medium text-white text-18px flex items-center ">AMAZING! the charity fund now has <span
-          className="mx-4 text-yellow-300 font-medium text-32px">{charityFundAmount} LSK</span></span>
+          className="mx-4 text-yellow-300 font-medium text-32px">{charityBalance} LSK</span></span>
         <Button label="Vote"/>
       </div>
       <Container
