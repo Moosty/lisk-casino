@@ -4,6 +4,11 @@ import { getApplication } from './app/app';
 import {PartialApplicationConfig} from "lisk-sdk";
 
 const conf = config as PartialApplicationConfig;
+conf.rpc = {
+  enable: true,
+    port: 3501,
+    mode: 'ws',
+}
 const app = getApplication(genesisBlock, conf);
 app.run()
   .then(() => app.logger.info('Blockchain application started...'))
