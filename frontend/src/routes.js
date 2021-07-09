@@ -63,13 +63,13 @@ export const Routes = () => {
               <Views.Lottery filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
             </Route>
             <Route path={"/charity"}>
-              <Views.Charity filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
+              <Views.Charity />
             </Route>
             <Route path={"/about"}>
-              <Views.About filters={filtersFilter} account={account} setModal={setCurrentOpen}/>
+              <Views.About />
             </Route>
             <Route path={"/"}>
-              <Views.Home filters={filtersFilter} account={account} setModal={setCurrentOpen} visible={visible}/>
+              <Views.Home />
             </Route>
           </Switch>
         </div>

@@ -29,8 +29,6 @@ export const MyProjects = ({account, setModal, filters, visible}) => {
     }
   }, [account])
 
-  useEffect(() => console.log(projects), [projects])
-
   const onRegister = async (date, project) => {
     const client = await getClient
     if (moment(date).isBefore(moment().subtract(1, 'd'))) {
@@ -328,7 +326,6 @@ export const MyProjects = ({account, setModal, filters, visible}) => {
         <AccountProjectList>
           {account && projects?.filter(project => project.owner.address === account.address && (project.state !== crowdFundStates.PREVIEW && project.state !== crowdFundStates.OPEN && project.state !== crowdFundStates.CANCELED && project.state !== crowdFundStates.FAILED && project.state !== crowdFundStates.ENDED)).map((project) => {
               const lastClaim = project?.claims?.length > 0 && project?.claims.reduce((acc, claim) => acc > claim.period ? acc : claim.period, 0)
-            console.log(project)
               return <AccountProjectSingleItem
                 gradient
                 {...project}
@@ -439,7 +436,6 @@ export const MyProjects = ({account, setModal, filters, visible}) => {
         <AccountProjectList>
           {account && projects?.filter(project => project.owner.address === account.address && (project.state === crowdFundStates.CANCELED || project.state === crowdFundStates.FAILED || project.state === crowdFundStates.ENDED)).map((project) => {
               const lastClaim = project?.claims?.length > 0 && project?.claims.reduce((acc, claim) => acc > claim.period ? acc : claim.period, 0)
-              console.log(lastClaim, project.claims)
               return <AccountProjectSingleItem
                 gradient
                 {...project}

@@ -4,6 +4,7 @@ import { getApplication } from '../../app/app';
 // import { registerModules } from '../../app/modules';
 
 export class GenesisBlockCommand extends BaseGenesisBlockCommand {
+	// @ts-ignore
 	public getApplication(
 		genesisBlock: Record<string, unknown>,
 		config: PartialApplicationConfig,

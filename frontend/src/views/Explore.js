@@ -11,10 +11,6 @@ export const Explore = ({account, setModal, filters, visible}) => {
   const {projects} = useProjects();
   const {height,} = useBlocks();
 
-  useEffect(() => {
-    console.log(projects)
-  }, [projects])
-
   return <div>
    <Container className={[ "my-20"].join(" ")}>
       <AccountProjectList>

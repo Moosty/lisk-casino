@@ -16,7 +16,7 @@ import {
 import { DashboardPlugin } from '@liskhq/lisk-framework-dashboard-plugin';
 import { FaucetPlugin } from '@liskhq/lisk-framework-faucet-plugin';
 import { join } from 'path';
-import { getApplication } from '../app/app';
+import { getApplication as getApp } from '../app/app';
 
 interface Flags {
 	[key: string]: string | number | boolean | undefined;
@@ -138,6 +138,7 @@ export class StartCommand extends BaseStartCommand {
 		}),
 	};
 
+	// @ts-ignore
 	public getApplication(
 		genesisBlock: Record<string, unknown>,
 		config: PartialApplicationConfig,
@@ -146,7 +147,7 @@ export class StartCommand extends BaseStartCommand {
 		const { flags } = this.parse(StartCommand);
 		// Set Plugins Config
 		setPluginConfig(config as ApplicationConfig, flags);
-		const app = getApplication(genesisBlock, config);
+		const app = getApp(genesisBlock, config);
 
 		if (flags['enable-http-api-plugin']) {
 			app.registerPlugin(HTTPAPIPlugin, { loadAsChildProcess: true });
@@ -159,12 +160,6 @@ export class StartCommand extends BaseStartCommand {
 		}
 		if (flags['enable-report-misbehavior-plugin']) {
 			app.registerPlugin(ReportMisbehaviorPlugin, { loadAsChildProcess: true });
-		}
-		if (flags['enable-faucet-plugin']) {
-			app.registerPlugin(FaucetPlugin, { loadAsChildProcess: true });
-		}
-		if (flags['enable-dashboard-plugin']) {
-			app.registerPlugin(DashboardPlugin, { loadAsChildProcess: true });
 		}
 
 		return app;

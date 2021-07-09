@@ -5,7 +5,6 @@ import {ContentSection} from "@moosty/dao-storybook";
 
 export const ContentContainer = () => {
   const location = useLocation();
-  useEffect(() => console.log(location), [location])
   return (
     <div className={"z-0"}>{location?.pathname === "/" && <ContentSection
       gradient
