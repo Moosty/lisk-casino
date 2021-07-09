@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Container, BreadCrumbs, Button} from "@moosty/dao-storybook";
-import {Filters} from "./Filters";
 import {useHistory, useLocation, useRouteMatch} from "react-router-dom";
 
 export const PageTop = ({updateFilters, filters, changeToggle}) => {
@@ -99,7 +98,7 @@ export const PageTop = ({updateFilters, filters, changeToggle}) => {
 
   return (<Container className="flex flex-row my-4 ">
     <BreadCrumbs crumbs={crumbs} className="flex-start w-full"/>
-    <Filters selectedItems={filters} updateFilters={updateFilters} hidden={filtersHidden} className="flex flex-row justify-end w-full" />
+    {/*<Filters selectedItems={filters} updateFilters={updateFilters} hidden={filtersHidden} className="flex flex-row justify-end w-full" />*/}
     {!toggleHidden && <Button label="Toggle View" onClick={changeToggle} />}
   </Container>)
 }

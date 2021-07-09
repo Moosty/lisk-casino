@@ -40,7 +40,7 @@ export const Blackjack = ({account}) => {
         moduleId: 8890,
         assetId: 2,
         assets: {
-          gameId: Buffer.from(activeGameId, 'hex'),
+          gameId: Buffer.from(game.id, 'hex'),
           hand: game.playerHands.findIndex(h => h.id === hand),
         },
         account,
@@ -50,8 +50,7 @@ export const Blackjack = ({account}) => {
         const findTransaction = async () => {
           try {
             await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
-            setGame(await client.invoke('poker:getGameById', {id: activeGameId}))
-            setActiveGameId(null)
+            setGame(await client.invoke('poker:getGameById', {id: game.id}))
           } catch (e) {
             setTimeout(async () => await findTransaction(), 1000)
           }
@@ -59,7 +58,6 @@ export const Blackjack = ({account}) => {
         await findTransaction()
       } else {
         setLoadingCreate(false)
-        setActiveGameId(null)
       }
     } catch (e) {
       setActiveGameId(null)
@@ -73,7 +71,7 @@ export const Blackjack = ({account}) => {
         moduleId: 8890,
         assetId: 1,
         assets: {
-          gameId: Buffer.from(activeGameId, 'hex'),
+          gameId: Buffer.from(game.id, 'hex'),
           hand: game.playerHands.findIndex(h => h.id === hand),
         },
         account,
@@ -83,7 +81,7 @@ export const Blackjack = ({account}) => {
         const findTransaction = async () => {
           try {
             await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
-            setGame(await client.invoke('poker:getGameById', {id: activeGameId}))
+            setGame(await client.invoke('poker:getGameById', {id: game.id}))
           } catch (e) {
             setTimeout(async () => await findTransaction(), 1000)
           }
@@ -104,7 +102,7 @@ export const Blackjack = ({account}) => {
         moduleId: 8890,
         assetId: 3,
         assets: {
-          gameId: Buffer.from(activeGameId, 'hex'),
+          gameId: Buffer.from(game.id, 'hex'),
           hand: game.playerHands.findIndex(h => h.id === hand),
         },
         account,
@@ -114,7 +112,7 @@ export const Blackjack = ({account}) => {
         const findTransaction = async () => {
           try {
             await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
-            setGame(await client.invoke('poker:getGameById', {id: activeGameId}))
+            setGame(await client.invoke('poker:getGameById', {id: game.id}))
           } catch (e) {
             setTimeout(async () => await findTransaction(), 1000)
           }
@@ -122,7 +120,6 @@ export const Blackjack = ({account}) => {
         await findTransaction()
       } else {
         setLoadingCreate(false)
-        console.log(result)
       }
     } catch (e) {
       console.log(e)
@@ -136,7 +133,7 @@ export const Blackjack = ({account}) => {
         moduleId: 8890,
         assetId: 4,
         assets: {
-          gameId: Buffer.from(activeGameId, 'hex'),
+          gameId: Buffer.from(game.id, 'hex'),
           hand: game.playerHands.findIndex(h => h.id === hand),
         },
         account,
@@ -146,7 +143,7 @@ export const Blackjack = ({account}) => {
         const findTransaction = async () => {
           try {
             await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
-            setGame(await client.invoke('poker:getGameById', {id: activeGameId}))
+            setGame(await client.invoke('poker:getGameById', {id: game.id}))
           } catch (e) {
             setTimeout(async () => await findTransaction(), 1000)
           }
@@ -180,17 +177,19 @@ export const Blackjack = ({account}) => {
           try {
             await client.transaction.get(Buffer.from(result.message.transactionId, 'hex'))
             setActiveGameId(gameId.toString('hex'))
+            setLoadingCreate(false)
           } catch (e) {
             setTimeout(async () => await findTransaction(), 1000)
           }
         }
         await findTransaction()
-
       } else {
         setLoadingCreate(false)
       }
     } catch (e) {
       console.log(e)
+      setLoadingCreate(false)
+
     }
   }
 
@@ -236,16 +235,13 @@ export const Blackjack = ({account}) => {
                   ]}/>
               </div>
               <div className="flex flex-row space-x-2">
-                <Button className="w-full" secondary label={activeGameId ? "In game.." : "Deal!"} onClick={startNewGame} disabled={game?.open === 1 || activeGameId} />
+                <Button className="w-full" secondary label={game?.open === 1 ? "In game.." : "Deal!"} onClick={startNewGame} disabled={game?.open === 1 || loadingCreate} />
                 <Button className="w-full" onClick={() => {
                   setBalance(parseInt(transactions.convertBeddowsToLSK(account?.chain?.token?.balance?.toString())))
                   setBet(0)
                 }} secondary label="Clear"/></div>
             </div>
           </div>
-          {/*<div className="w-3/4 bg-gradient-to-r from-indigo-600  to-indigo-800 p-8 rounded-default flex flex-col space-y-4">*/}
-          {/*  <TableTransactions/>*/}
-          {/*</div>*/}
         </div>
       </div>
 
