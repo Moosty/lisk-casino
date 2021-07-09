@@ -23,6 +23,13 @@ export const Charity = ({account, setModal, filters, visible, userName, hands, c
   const {projects} = useProjects();
   const {height,} = useBlocks();
 
+  useEffect(() => {
+    const getCharity = async () => {
+      const client = await getClient;
+      const charityAccount = await client.invoke('app:getAccount', {})
+    }
+  }, [account])
+
   return (
     <>
       <Header title="The Charity fund!"

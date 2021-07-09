@@ -56,7 +56,6 @@ export class HoldAsset extends BaseAsset {
 				`Hand is already ${game.playerHands[asset.hand].state}`
 			)
 		}
-
 		game.playerHands[asset.hand].state = "hold"
 
 		if (isLastHand(game)) {
@@ -64,7 +63,6 @@ export class HoldAsset extends BaseAsset {
 		} else {
 			await updateGame(stateStore, game)
 		}
-		console.log(123123123123123123)
 	}
 
 }

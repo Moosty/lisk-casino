@@ -35,7 +35,7 @@ export class LotteryModule extends BaseModule {
     $id: 'lottery/account',
     title: 'Lottery prizes',
     type: 'object',
-    required: ['prizes', 'nonce'],
+    required: ['prizes', 'nonce', 'tickets'],
     properties: {
       prizes: {
         fieldNumber: 1,
@@ -70,20 +70,7 @@ export class LotteryModule extends BaseModule {
     getPlayerArchive: async ({address}) => await getPlayerArchive(this._dataAccess, address),
   };
 
-  public reducers = {
-    // Example below
-    // getBalance: async (
-    // 	params: Record<string, unknown>,
-    // 	stateStore: StateStore,
-    // ): Promise<bigint> => {
-    // 	const { address } = params;
-    // 	if (!Buffer.isBuffer(address)) {
-    // 		throw new Error('Address must be a buffer');
-    // 	}
-    // 	const account = await stateStore.account.getOrDefault<TokenAccount>(address);
-    // 	return account.token.balance;
-    // },
-  };
+  public reducers = {};
   public name = 'lottery';
   public transactionAssets = [new BuyTicketAsset(), new ClaimPriceAsset()];
   public events = [
@@ -134,7 +121,6 @@ export class LotteryModule extends BaseModule {
           winner.lottery.prizes.push(ticket.id)
           await _input.stateStore.account.set(ticket.owner, winner)
         } else {
-          console.log(123123123123123, ticket.id.toString('hex'))
           await archiveTicket(_input.stateStore, ticket.id, ticket.owner)
         }
         await updateTicket(_input.stateStore, ticket)
