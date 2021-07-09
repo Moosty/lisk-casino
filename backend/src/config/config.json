@@ -11480,10 +11480,10 @@
 		"seedPeers": [
 			{
 				"ip": "127.0.0.1",
-				"port": 5000
+				"port": 8886
 			}
 		],
-		"port": 5000
+		"port": 8886
 	},
 	"transactionPool": {
 		"maxTransactions": 4096,
@@ -11495,7 +11495,7 @@
 	"plugins": {
 		"httpApi": {
 			"enabled": true,
-			"port": 5001
+			"port": 8887
 		}
 	}
 }
