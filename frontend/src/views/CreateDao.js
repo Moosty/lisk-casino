@@ -163,7 +163,6 @@ export const CreateDao = ({account, setModal}) => {
     }
   }, [account])
 
-  useEffect(() => console.log(formData), [formData])
 
   return (<Container>
     <div className="lg:ml-4 my-4 ">
@@ -221,7 +220,6 @@ export const CreateDao = ({account, setModal}) => {
               <MultipleChoice
                 maxItems={10}
                 onChange={(options) => {
-                  console.log(options)
                   updateFormData('members', [...options.map(option => ({...option, selectedItem: option.value}))])
                 }}
                 minItems={1}
@@ -232,7 +230,6 @@ export const CreateDao = ({account, setModal}) => {
                   selectedItem: {id: 0, name: "Select a member"},
                 }}
                 options={formData?.members.map(m => {
-                  console.log(m.selectedItem)
                   return m
                 })}
               />

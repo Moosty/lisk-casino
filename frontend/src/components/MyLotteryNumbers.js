@@ -7,7 +7,6 @@ const colors = [
   'bg-blue-500',
 ]
 export const MyLotteryNumbers = ({ticket, won, currentRound, round, numbers}) => {
-  // console.log(ticket, won, currentRound, round)
   const {getClient} = useContext(AppContext);
   const [winningRound, setWinningRound] = useState()
 
@@ -16,13 +15,10 @@ export const MyLotteryNumbers = ({ticket, won, currentRound, round, numbers}) =>
       const client = await getClient;
       setWinningRound(await client.invoke('lottery:getRound', {round}))
     }
-    console.log(won, won && won.find(w => w.id === ticket.id))
     if (won?.length > 0 && won.find(w => w.id === ticket.id)) {
       getRound(ticket.round)
     }
   }, [won])
-
-  useEffect(() => console.log(winningRound), [winningRound])
 
   return (
     <div className="flex flex-row space-x-4">

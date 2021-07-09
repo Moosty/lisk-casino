@@ -11,7 +11,6 @@ export const useMembers = () => {
       const client = await getClient;
       const membersList = await client.invoke("sprinkler:getAllUsernames");
       if (membersList?.length > 0) {
-        console.log(filter)
         setMembers(membersList.filter(typeof filter.memberFilter === "function" ? filter.memberFilter : () => true).map(m => ({
           id: m.ownerAddress,
           icon: `https://avatar.moosty.com/${m.ownerAddress}`,

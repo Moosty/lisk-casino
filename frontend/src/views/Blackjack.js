@@ -60,13 +60,9 @@ export const Blackjack = ({account}) => {
       } else {
         setLoadingCreate(false)
         setActiveGameId(null)
-
-        console.log(result)
       }
     } catch (e) {
       setActiveGameId(null)
-
-      console.log(e)
     }
   }
 
@@ -95,7 +91,6 @@ export const Blackjack = ({account}) => {
         await findTransaction()
       } else {
         setLoadingCreate(false)
-        console.log(result)
       }
     } catch (e) {
       console.log(e)
@@ -159,7 +154,6 @@ export const Blackjack = ({account}) => {
         await findTransaction()
       } else {
         setLoadingCreate(false)
-        console.log(result)
       }
     } catch (e) {
       console.log(e)
@@ -194,7 +188,6 @@ export const Blackjack = ({account}) => {
 
       } else {
         setLoadingCreate(false)
-        console.log(result)
       }
     } catch (e) {
       console.log(e)

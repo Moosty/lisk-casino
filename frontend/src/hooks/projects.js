@@ -59,7 +59,6 @@ export const useProjects = () => {
     if (state === crowdFundStates.ENDED.toLowerCase()) {
       return {state: crowdFundStates.ENDED}
     }
-    console.log(project)
     if (height < project.startProject) {
       return {state: crowdFundStates.ACTIVE.PENDING}
     }

@@ -63,11 +63,10 @@ export class LotteryModule extends BaseModule {
     }
   }
 
-  // @ts-ignore
   public actions = {
-    getTicketById: async ({id}) => await getTicketById(this._dataAccess, id),
-    getRound: async ({round}) => await getRound(this._dataAccess, round),
-    getPlayerArchive: async ({address}) => await getPlayerArchive(this._dataAccess, address),
+    getTicketById: async (params) => await getTicketById(this._dataAccess, params.id),
+    getRound: async (params) => await getRound(this._dataAccess, params.round),
+    getPlayerArchive: async (params) => await getPlayerArchive(this._dataAccess, params.address),
   };
 
   public reducers = {};
